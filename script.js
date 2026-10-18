@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — SCRIPT ENGINE
+   QUIET RESET — SCRIPT ENGINE WITH APPLE-STYLE SCROLL SCRUBBING
    ========================================================================== */
 
 // 1. Audience Profiles from the Back Cover
@@ -85,53 +85,94 @@ let audioContext = null;
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("js-loaded");
   renderAudienceCards();
   renderReviews();
-  setup3DBookTilt();
   setupEventListeners();
-  setupScrollEffects();
+  setupAppleScrollScrubEngine();
 });
 
-// Scroll Progress & Reveal
-function setupScrollEffects() {
+// ==========================================================================
+// APPLE-STYLE SCROLL SCRUB & 3D RIG INTERPOLATION
+// ==========================================================================
+function setupAppleScrollScrubEngine() {
   const progressBar = document.getElementById("scrollProgressLine");
+  const stage = document.querySelector(".apple-scroll-stage");
+  const bookRig = document.getElementById("appleBookRig");
+  const glare = document.getElementById("appleRigGlare");
+  const captions = document.querySelectorAll(".apple-caption-card");
 
-  window.addEventListener("scroll", () => {
+  let currentProgress = 0;
+  let targetProgress = 0;
+
+  function updateScroll() {
+    // Top Progress Line
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     if (progressBar && docHeight > 0) {
       progressBar.style.width = ((scrollTop / docHeight) * 100) + "%";
     }
-  }, { passive: true });
 
-  const elements = document.querySelectorAll(".anim-reveal");
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const delay = parseInt(entry.target.getAttribute("data-delay") || "0", 10);
-          setTimeout(() => {
-            entry.target.classList.add("is-visible");
-          }, delay);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    elements.forEach((el) => observer.observe(el));
-  } else {
-    elements.forEach((el) => el.classList.add("is-visible"));
+    // Pinned Apple Stage Scrub
+    if (stage) {
+      const rect = stage.getBoundingClientRect();
+      const stageHeight = stage.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      let progress = scrolled / stageHeight;
+      progress = Math.max(0, Math.min(1, progress));
+      targetProgress = progress;
+    }
   }
+
+  // Smooth 60fps / 120fps physics loop (Apple smooth interpolation)
+  function renderLoop() {
+    currentProgress += (targetProgress - currentProgress) * 0.12;
+
+    if (bookRig) {
+      // 3D Rotation Interpolation synced directly to scroll
+      // Stage starts angled (-18deg), straightens flat (0deg), then lifts up (+12deg)
+      const rotY = -18 + (currentProgress * 26);
+      const rotX = 14 - (currentProgress * 22);
+      const scale = 0.96 + (currentProgress * 0.22);
+      const translateY = -15 + (currentProgress * 30);
+
+      bookRig.style.transform = `perspective(1400px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(1)}px)`;
+
+      // Specular glare moving across the book
+      if (glare) {
+        const glareX = (currentProgress * 100).toFixed(1);
+        glare.style.opacity = (currentProgress > 0.05 && currentProgress < 0.95) ? "0.4" : "0";
+        glare.style.background = `radial-gradient(circle at ${glareX}% 40%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 65%)`;
+      }
+    }
+
+    // Step Captions fading in/out
+    captions.forEach((cap, idx) => {
+      const step = parseInt(cap.getAttribute("data-step") || "0", 10);
+      const minP = step * 0.33;
+      const maxP = (step + 1) * 0.33;
+
+      if (currentProgress >= minP && currentProgress < maxP) {
+        cap.classList.add("active");
+      } else {
+        cap.classList.remove("active");
+      }
+    });
+
+    requestAnimationFrame(renderLoop);
+  }
+
+  window.addEventListener("scroll", updateScroll, { passive: true });
+  updateScroll();
+  requestAnimationFrame(renderLoop);
 }
 
-// Render Audience
+// Render Audience Cards
 function renderAudienceCards() {
   const container = document.getElementById("audienceContainer");
   if (!container) return;
 
   container.innerHTML = audienceData.map((item, idx) => {
-    return '<div class="audience-interactive-card anim-reveal" onclick="toggleAudienceCard(' + idx + ')">' +
+    return '<div class="audience-interactive-card" onclick="toggleAudienceCard(' + idx + ')">' +
       '<div class="card-top-row">' +
         '<i class="fa-solid ' + item.icon + ' audience-icon"></i>' +
         '<i class="fa-solid fa-chevron-down expand-chevron"></i>' +
@@ -163,7 +204,7 @@ function renderReviews() {
     for (let i = 0; i < r.stars; i++) {
       starHtml += '<i class="fa-solid fa-star"></i>';
     }
-    return '<div class="review-lux-card anim-reveal">' +
+    return '<div class="review-lux-card">' +
       '<div>' +
         '<div class="stars">' + starHtml + '</div>' +
         '<p class="quote">“' + r.quote + '”</p>' +
@@ -174,38 +215,6 @@ function renderReviews() {
       '</div>' +
     '</div>';
   }).join("");
-}
-
-// 3D Book Tilt Physics
-function setup3DBookTilt() {
-  const viewport = document.getElementById("bookViewport");
-  const card = document.getElementById("book3d");
-  const glare = document.getElementById("photoGlare");
-
-  if (!viewport || !card) return;
-
-  viewport.addEventListener("mousemove", (e) => {
-    const rect = viewport.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotX = -((y - centerY) / centerY) * 14;
-    const rotY = ((x - centerX) / centerX) * 14;
-
-    card.style.transform = "perspective(1400px) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale(1.1)";
-
-    if (glare) {
-      glare.style.opacity = "0.4";
-      glare.style.background = "radial-gradient(circle at " + x + "px " + y + "px, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 65%)";
-    }
-  });
-
-  viewport.addEventListener("mouseleave", () => {
-    card.style.transform = "perspective(1400px) rotateX(6deg) rotateY(-8deg) scale(1.08)";
-    if (glare) glare.style.opacity = "0";
-  });
 }
 
 // Event Listeners
@@ -404,7 +413,6 @@ function updateCartDrawer() {
     if (subtotal >= 799) {
       statusLabel.innerHTML = "<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery";
     } else {
-      const diff = 799 - subtotal;
       statusLabel.innerText = "Add ₱" + (799 - subtotal).toLocaleString() + " more for FREE shipping";
     }
   }
@@ -447,7 +455,7 @@ function showToast(msg) {
   }, 2800);
 }
 
-// Ambient Audio
+// Sanctuary Ambient Audio
 function toggleAmbientSound() {
   const btn = document.getElementById("soundStatus");
   if (!isAudioPlaying) {

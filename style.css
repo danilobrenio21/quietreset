@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — DESIGN SYSTEM WITH BULLETPROOF VISIBILITY
+   QUIET RESET — BESPOKE APPLE-STYLE DESIGN & SCROLL ENGINE
    ========================================================================== */
 
 :root {
@@ -60,10 +60,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ==========================================================================
-   SAFE SCROLL ANIMATION (NEVER HIDES CONTENT BY ACCIDENT)
-   ========================================================================== */
-
+/* Apple-Style Global Progress Line */
 .scroll-progress-line {
   position: fixed;
   top: 0;
@@ -73,25 +70,6 @@ body {
   background: linear-gradient(90deg, var(--c-sage-500), var(--c-gold-500));
   z-index: 1000;
   transition: width 0.1s ease-out;
-}
-
-/* Content stays visible by default */
-.anim-reveal {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Once JS mounts, smoothly stage in remaining sections */
-.js-loaded .anim-reveal {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.js-loaded .anim-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Ambient Audio Bar */
@@ -145,7 +123,7 @@ body {
   color: var(--c-gold-400);
 }
 
-/* Layout Utilities */
+/* Container */
 .container {
   width: 92%;
   max-width: 1240px;
@@ -268,7 +246,7 @@ body {
 }
 
 /* ==========================================================================
-   HERO STAGE & LARGE 3D BOOK
+   HERO STAGE
    ========================================================================== */
 
 .hero-stage {
@@ -438,7 +416,6 @@ body {
   color: var(--c-sage-500);
 }
 
-/* Extra Large Hand-Sized 3D Book Showcase */
 .hero-book-showcase {
   display: flex;
   flex-direction: column;
@@ -450,23 +427,15 @@ body {
 .book-viewport {
   width: 100%;
   max-width: 660px;
-  perspective: 1600px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
 }
 
 .book-photo-card {
   position: relative;
   width: 100%;
-  max-width: 620px;
-  transform-style: preserve-3d;
-  transform: rotateX(6deg) rotateY(-8deg) scale(1.08);
-  transition: transform 0.15s ease-out;
-  will-change: transform;
-  background: transparent;
-  box-shadow: none;
+  max-width: 600px;
 }
 
 .book-mockup-img {
@@ -474,27 +443,119 @@ body {
   height: auto;
   display: block;
   filter: drop-shadow(0 30px 50px rgba(18, 36, 25, 0.28));
-  pointer-events: none;
-  user-select: none;
 }
 
-.photo-glare {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+/* ==========================================================================
+   APPLE-STYLE STICKY PINNED 3D SCROLL SCRUB STAGE
+   ========================================================================== */
+
+.apple-scroll-stage {
+  position: relative;
+  height: 280vh; /* Deliberate scroll run for the animation scrub */
+  background: radial-gradient(circle at 50% 50%, #f6f3ea 0%, #ebe5d7 100%);
 }
 
-.hint-3d {
-  margin-top: 14px;
-  font-size: 0.82rem;
-  color: var(--c-text-muted);
+.apple-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+}
+
+.apple-canvas-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1600px;
+  pointer-events: none;
+}
+
+.apple-book-rig {
+  position: relative;
+  width: 580px;
+  max-width: 85vw;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform, filter;
+  transition: transform 0.08s ease-out;
+}
+
+.apple-rig-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 35px 60px rgba(18, 36, 25, 0.32));
+}
+
+.apple-rig-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Apple Kinetic Stream Captions */
+.apple-caption-stream {
+  position: absolute;
+  left: 8%;
+  bottom: 12%;
+  max-width: 440px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.apple-caption-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  background: rgba(253, 252, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-card);
+}
+
+.apple-caption-card.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.step-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--c-gold-600);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.apple-caption-card h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--c-forest-900);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.apple-caption-card p {
+  font-size: 0.92rem;
+  color: var(--c-text-muted);
+  line-height: 1.6;
 }
 
 /* ==========================================================================
@@ -553,6 +614,40 @@ body {
   color: var(--c-gold-500);
 }
 
+.section-badge-left {
+  display: inline-block;
+  background: var(--c-sage-100);
+  color: var(--c-forest-800);
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.section-main-heading {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: var(--c-forest-900);
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.section-main-heading.text-left {
+  text-align: left;
+}
+
+.section-sub-heading {
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--c-text-muted);
+  max-width: 650px;
+  margin: 0 auto 60px;
+}
+
 .craft-lead {
   font-size: 1.15rem;
   color: var(--c-forest-800);
@@ -599,7 +694,7 @@ body {
 }
 
 /* ==========================================================================
-   FREE EBOOK SECTION
+   FREE EBOOK & PRAYER SECTIONS
    ========================================================================== */
 
 .section-free-ebook {
@@ -704,10 +799,6 @@ body {
   line-height: 1.1;
 }
 
-/* ==========================================================================
-   PRAYER REQUEST SECTION
-   ========================================================================== */
-
 .section-prayer {
   padding: 30px 0 70px;
 }
@@ -767,10 +858,6 @@ body {
    PILLARS & AUDIENCE
    ========================================================================== */
 
-.section-pillars, .section-audience, .section-shop, .section-author, .section-reviews {
-  padding: 90px 0;
-}
-
 .section-badge-center {
   display: table;
   margin: 0 auto 16px;
@@ -782,45 +869,6 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-}
-
-.section-badge-left {
-  display: inline-block;
-  background: var(--c-sage-100);
-  color: var(--c-forest-800);
-  padding: 4px 16px;
-  border-radius: var(--radius-pill);
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 16px;
-}
-
-.section-main-heading {
-  font-family: var(--font-serif);
-  font-size: 2.8rem;
-  color: var(--c-forest-900);
-  text-align: center;
-  line-height: 1.2;
-  margin-bottom: 16px;
-}
-
-.section-main-heading.text-left {
-  text-align: left;
-}
-
-.section-sub-heading {
-  text-align: center;
-  font-size: 1.05rem;
-  color: var(--c-text-muted);
-  max-width: 650px;
-  margin: 0 auto 60px;
-}
-
-.section-sub-heading.text-left {
-  text-align: left;
-  margin: 0 0 40px;
 }
 
 .pillars-container {
@@ -1050,6 +1098,10 @@ body {
 /* ==========================================================================
    BUNDLES & STORE
    ========================================================================== */
+
+.section-shop, .section-author, .section-reviews {
+  padding: 90px 0;
+}
 
 .bundles-lux-grid {
   display: grid;
@@ -1834,7 +1886,7 @@ body {
   color: var(--c-gold-400);
 }
 
-/* Footer & Logo */
+/* Footer */
 .lux-footer {
   background: var(--c-forest-900);
   color: var(--c-cream-300);
@@ -1912,10 +1964,7 @@ body {
   font-size: 1.1rem;
 }
 
-/* ==========================================================================
-   RESPONSIVE (DESKTOP, TABLET & MOBILE)
-   ========================================================================== */
-
+/* Responsive */
 @media (max-width: 980px) {
   .hero-layout, .author-split, .footer-content-grid, .free-ebook-card, .craft-grid {
     grid-template-columns: 1fr;
@@ -1937,12 +1986,6 @@ body {
     font-size: 2.8rem;
   }
 
-  .hero-lead {
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .hero-actions {
     justify-content: center;
     flex-wrap: wrap;
@@ -1956,18 +1999,19 @@ body {
     justify-content: center;
   }
 
-  .hero-book-showcase {
-    order: -1;
-    margin-bottom: 24px;
+  .apple-scroll-stage {
+    height: 220vh;
   }
 
-  .book-viewport {
-    max-width: 480px;
+  .apple-caption-stream {
+    left: 5%;
+    right: 5%;
+    max-width: 90%;
+    bottom: 6%;
   }
 
-  .book-photo-card {
-    max-width: 420px;
-    transform: rotateX(4deg) rotateY(-4deg) scale(1);
+  .apple-caption-card {
+    width: 100%;
   }
 
   .pillars-container, .bundles-lux-grid {
@@ -1992,14 +2036,6 @@ body {
 @media (max-width: 480px) {
   .hero-heading {
     font-size: 2.2rem;
-  }
-
-  .book-viewport {
-    max-width: 340px;
-  }
-
-  .book-photo-card {
-    max-width: 320px;
   }
 
   .free-ebook-card {
