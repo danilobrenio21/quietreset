@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — SCRIPT ENGINE WITH APPLE-STYLE SCROLL SCRUBBING
+   QUIET RESET — SCRIPT ENGINE
    ========================================================================== */
 
 // 1. Audience Profiles from the Back Cover
@@ -55,7 +55,7 @@ const audienceData = [
   }
 ];
 
-// 2. Reader Reviews
+// 2. Real Reader Reviews
 const reviewsList = [
   {
     name: "Atty. Christine V.",
@@ -79,7 +79,6 @@ const reviewsList = [
 
 // 3. Cart State
 let cart = [];
-let discount = 0;
 let isAudioPlaying = false;
 let audioContext = null;
 
@@ -88,109 +87,35 @@ document.addEventListener("DOMContentLoaded", () => {
   renderAudienceCards();
   renderReviews();
   setupEventListeners();
-  setupAppleScrollScrubEngine();
 });
 
-// ==========================================================================
-// APPLE-STYLE SCROLL SCRUB & 3D RIG INTERPOLATION
-// ==========================================================================
-function setupAppleScrollScrubEngine() {
-  const progressBar = document.getElementById("scrollProgressLine");
-  const stage = document.querySelector(".apple-scroll-stage");
-  const bookRig = document.getElementById("appleBookRig");
-  const glare = document.getElementById("appleRigGlare");
-  const captions = document.querySelectorAll(".apple-caption-card");
-
-  let currentProgress = 0;
-  let targetProgress = 0;
-
-  function updateScroll() {
-    // Top Progress Line
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    if (progressBar && docHeight > 0) {
-      progressBar.style.width = ((scrollTop / docHeight) * 100) + "%";
-    }
-
-    // Pinned Apple Stage Scrub
-    if (stage) {
-      const rect = stage.getBoundingClientRect();
-      const stageHeight = stage.offsetHeight - window.innerHeight;
-      const scrolled = -rect.top;
-      let progress = scrolled / stageHeight;
-      progress = Math.max(0, Math.min(1, progress));
-      targetProgress = progress;
-    }
-  }
-
-  // Smooth 60fps / 120fps physics loop (Apple smooth interpolation)
-  function renderLoop() {
-    currentProgress += (targetProgress - currentProgress) * 0.12;
-
-    if (bookRig) {
-      // 3D Rotation Interpolation synced directly to scroll
-      // Stage starts angled (-18deg), straightens flat (0deg), then lifts up (+12deg)
-      const rotY = -18 + (currentProgress * 26);
-      const rotX = 14 - (currentProgress * 22);
-      const scale = 0.96 + (currentProgress * 0.22);
-      const translateY = -15 + (currentProgress * 30);
-
-      bookRig.style.transform = `perspective(1400px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(${scale.toFixed(3)}) translateY(${translateY.toFixed(1)}px)`;
-
-      // Specular glare moving across the book
-      if (glare) {
-        const glareX = (currentProgress * 100).toFixed(1);
-        glare.style.opacity = (currentProgress > 0.05 && currentProgress < 0.95) ? "0.4" : "0";
-        glare.style.background = `radial-gradient(circle at ${glareX}% 40%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 65%)`;
-      }
-    }
-
-    // Step Captions fading in/out
-    captions.forEach((cap, idx) => {
-      const step = parseInt(cap.getAttribute("data-step") || "0", 10);
-      const minP = step * 0.33;
-      const maxP = (step + 1) * 0.33;
-
-      if (currentProgress >= minP && currentProgress < maxP) {
-        cap.classList.add("active");
-      } else {
-        cap.classList.remove("active");
-      }
-    });
-
-    requestAnimationFrame(renderLoop);
-  }
-
-  window.addEventListener("scroll", updateScroll, { passive: true });
-  updateScroll();
-  requestAnimationFrame(renderLoop);
-}
-
-// Render Audience Cards
+// Render Audience
 function renderAudienceCards() {
   const container = document.getElementById("audienceContainer");
   if (!container) return;
 
   container.innerHTML = audienceData.map((item, idx) => {
-    return '<div class="audience-interactive-card" onclick="toggleAudienceCard(' + idx + ')">' +
-      '<div class="card-top-row">' +
-        '<i class="fa-solid ' + item.icon + ' audience-icon"></i>' +
-        '<i class="fa-solid fa-chevron-down expand-chevron"></i>' +
-      '</div>' +
-      '<h4 class="audience-title">' + item.title + '</h4>' +
-      '<p class="audience-snippet">' + item.preview + '</p>' +
-      '<div class="audience-expanded-content" id="audience-expand-' + idx + '">' +
-        '<p class="letter-to-reader">"' + item.letter + '"</p>' +
-        '<span class="scripture-anchor"><i class="fa-solid fa-book-bible"></i> ' + item.scripture + '</span>' +
-      '</div>' +
-    '</div>';
+    return `
+      <div class="audience-card" onclick="toggleAudienceCard(${idx})">
+        <div class="card-top">
+          <i class="fa-solid ${item.icon} icon"></i>
+          <i class="fa-solid fa-chevron-down arrow"></i>
+        </div>
+        <h4>${item.title}</h4>
+        <p class="preview">${item.preview}</p>
+        <div class="card-expanded-letter" id="audience-letter-${idx}">
+          <p>"${item.letter}"</p>
+          <span><i class="fa-solid fa-book-bible"></i> ${item.scripture}</span>
+        </div>
+      </div>
+    `;
   }).join("");
 }
 
 function toggleAudienceCard(idx) {
-  const cards = document.querySelectorAll(".audience-interactive-card");
+  const cards = document.querySelectorAll(".audience-card");
   if (cards[idx]) {
-    cards[idx].classList.toggle("expanded");
+    cards[idx].classList.toggle("open");
   }
 }
 
@@ -200,20 +125,16 @@ function renderReviews() {
   if (!container) return;
 
   container.innerHTML = reviewsList.map((r) => {
-    let starHtml = "";
-    for (let i = 0; i < r.stars; i++) {
-      starHtml += '<i class="fa-solid fa-star"></i>';
-    }
-    return '<div class="review-lux-card">' +
-      '<div>' +
-        '<div class="stars">' + starHtml + '</div>' +
-        '<p class="quote">“' + r.quote + '”</p>' +
-      '</div>' +
-      '<div class="reviewer-meta">' +
-        '<div class="name">' + r.name + '</div>' +
-        '<div class="role">' + r.role + '</div>' +
-      '</div>' +
-    '</div>';
+    return `
+      <div class="review-card">
+        <div class="review-stars">${'<i class="fa-solid fa-star"></i>'.repeat(r.stars)}</div>
+        <p class="review-quote">“${r.quote}”</p>
+        <div class="review-author">
+          <strong>${r.name}</strong>
+          <span>${r.role}</span>
+        </div>
+      </div>
+    `;
   }).join("");
 }
 
@@ -227,7 +148,6 @@ function setupEventListeners() {
   const openReviewBtn = document.getElementById("openReviewBtn");
   const closeReviewModalBtn = document.getElementById("closeReviewModalBtn");
   const reviewForm = document.getElementById("reviewSubmissionForm");
-  const applyPromoBtn = document.getElementById("applyPromoBtn");
   const checkoutTriggerBtn = document.getElementById("checkoutTriggerBtn");
   const closeCheckoutBtn = document.getElementById("closeCheckoutBtn");
   const checkoutForm = document.getElementById("checkoutForm");
@@ -266,45 +186,15 @@ function setupEventListeners() {
   if (reviewForm) {
     reviewForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const nameInput = document.getElementById("revName");
-      const roleInput = document.getElementById("revRole");
-      const rateInput = document.getElementById("revRating");
-      const textInput = document.getElementById("revComment");
+      const name = document.getElementById("revName").value;
+      const role = document.getElementById("revRole").value;
+      const quote = document.getElementById("revComment").value;
 
-      reviewsList.unshift({
-        name: nameInput ? nameInput.value : "Anonymous",
-        role: roleInput ? roleInput.value : "Reader",
-        stars: parseInt(rateInput ? rateInput.value : "5", 10),
-        quote: textInput ? textInput.value : ""
-      });
-
+      reviewsList.unshift({ name, role, stars: 5, quote });
       renderReviews();
       closeAllModals();
       showToast("Thank you. Your testimony has been added!");
       e.target.reset();
-    });
-  }
-
-  if (applyPromoBtn) {
-    applyPromoBtn.addEventListener("click", () => {
-      const input = document.getElementById("promoCodeInput");
-      const code = input ? input.value.trim().toUpperCase() : "";
-      const note = document.getElementById("couponNote");
-
-      if (code === "RESET10") {
-        discount = 0.10;
-        if (note) {
-          note.innerText = "10% discount applied!";
-          note.style.color = "#345e44";
-        }
-        updateCartDrawer();
-        showToast("Promo code RESET10 applied!");
-      } else {
-        if (note) {
-          note.innerText = "Invalid code. Try RESET10";
-          note.style.color = "#b03e3e";
-        }
-      }
     });
   }
 
@@ -328,7 +218,7 @@ function setupEventListeners() {
       closeAllModals();
       cart = [];
       updateCartDrawer();
-      alert("Blessings! Your order has been placed. You will receive an SMS shipping confirmation with your tracking code.");
+      alert("Blessings! Your order has been placed. You will receive an SMS confirmation with tracking.");
     });
   }
 
@@ -341,102 +231,63 @@ function addToBag(id, name, price) {
   if (existing) {
     existing.qty += 1;
   } else {
-    cart.push({ id: id, name: name, price: price, qty: 1 });
+    cart.push({ id, name, price, qty: 1 });
   }
   updateCartDrawer();
   openCartDrawer();
-  showToast("Added " + name + " to your bag");
+  showToast(`Added ${name} to your bag`);
 }
 
 function updateCartDrawer() {
   const listEl = document.getElementById("cartItemsList");
   const countBadge = document.getElementById("cartCount");
   const drawerCount = document.getElementById("drawerItemCount");
-  const subtotalEl = document.getElementById("summarySubtotal");
-  const discountRow = document.getElementById("summaryDiscountRow");
-  const discountEl = document.getElementById("summaryDiscount");
   const totalEl = document.getElementById("summaryTotal");
-  const fillBar = document.getElementById("shippingFill");
-  const statusLabel = document.getElementById("shippingStatusLabel");
-  const pctLabel = document.getElementById("shippingPctLabel");
 
   if (!listEl) return;
 
   const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
   if (countBadge) countBadge.innerText = totalItems;
-  if (drawerCount) drawerCount.innerText = totalItems + (totalItems === 1 ? " item" : " items");
+  if (drawerCount) drawerCount.innerText = totalItems;
 
   if (cart.length === 0) {
-    listEl.innerHTML = '<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>';
-    if (subtotalEl) subtotalEl.innerText = "₱0";
+    listEl.innerHTML = '<p style="text-align: center; color: #888; padding: 40px 0;">Your shopping bag is empty.</p>';
     if (totalEl) totalEl.innerText = "₱0";
-    if (discountRow) discountRow.style.display = "none";
-    if (fillBar) fillBar.style.width = "0%";
-    if (statusLabel) statusLabel.innerText = "Add ₱799 for FREE nationwide shipping";
-    if (pctLabel) pctLabel.innerText = "0%";
     return;
   }
 
   listEl.innerHTML = cart.map((item, index) => {
-    return '<div class="cart-item-row">' +
-      '<div class="item-meta">' +
-        '<h4>' + item.name + '</h4>' +
-        '<span class="price">₱' + item.price.toLocaleString() + '</span>' +
-      '</div>' +
-      '<div class="quantity-controller">' +
-        '<button onclick="changeQty(' + index + ', -1)">–</button>' +
-        '<span>' + item.qty + '</span>' +
-        '<button onclick="changeQty(' + index + ', 1)">+</button>' +
-      '</div>' +
-    '</div>';
+    return `
+      <div class="cart-item">
+        <div>
+          <h4>${item.name}</h4>
+          <span style="color: var(--c-gold-600); font-weight: 600;">₱${item.price.toLocaleString()}</span>
+        </div>
+        <button onclick="removeItem(${index})" style="background: none; border: none; color: #a00; cursor: pointer;">Remove</button>
+      </div>
+    `;
   }).join("");
 
   const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
-  const discountVal = subtotal * discount;
-  const finalTotal = subtotal - discountVal;
-
-  if (subtotalEl) subtotalEl.innerText = "₱" + subtotal.toLocaleString();
-  if (totalEl) totalEl.innerText = "₱" + finalTotal.toLocaleString();
-
-  if (discount > 0) {
-    if (discountRow) discountRow.style.display = "flex";
-    if (discountEl) discountEl.innerText = "-₱" + discountVal.toLocaleString();
-  } else {
-    if (discountRow) discountRow.style.display = "none";
-  }
-
-  const pct = Math.min(Math.round((subtotal / 799) * 100), 100);
-  if (fillBar) fillBar.style.width = pct + "%";
-  if (pctLabel) pctLabel.innerText = pct + "%";
-
-  if (statusLabel) {
-    if (subtotal >= 799) {
-      statusLabel.innerHTML = "<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery";
-    } else {
-      statusLabel.innerText = "Add ₱" + (799 - subtotal).toLocaleString() + " more for FREE shipping";
-    }
-  }
+  if (totalEl) totalEl.innerText = "₱" + subtotal.toLocaleString();
 }
 
-function changeQty(index, change) {
-  cart[index].qty += change;
-  if (cart[index].qty <= 0) {
-    cart.splice(index, 1);
-  }
+function removeItem(index) {
+  cart.splice(index, 1);
   updateCartDrawer();
 }
 
 function openCartDrawer() {
   const drawer = document.getElementById("cartDrawer");
   const backdrop = document.getElementById("cartBackdrop");
-  if (drawer) drawer.classList.add("active");
+  if (drawer) drawer.classList.add("open");
   if (backdrop) backdrop.style.display = "block";
 }
 
 function closeCartDrawer() {
   const drawer = document.getElementById("cartDrawer");
   const backdrop = document.getElementById("cartBackdrop");
-  if (drawer) drawer.classList.remove("active");
+  if (drawer) drawer.classList.remove("open");
   if (backdrop) backdrop.style.display = "none";
 }
 
@@ -452,10 +303,10 @@ function showToast(msg) {
   t.style.display = "flex";
   setTimeout(() => {
     t.style.display = "none";
-  }, 2800);
+  }, 2500);
 }
 
-// Sanctuary Ambient Audio
+// Gentle Ambient Sound
 function toggleAmbientSound() {
   const btn = document.getElementById("soundStatus");
   if (!isAudioPlaying) {

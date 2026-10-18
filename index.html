@@ -17,9 +17,6 @@
 </head>
 <body>
 
-  <!-- Apple-Style Global Progress Bar -->
-  <div class="scroll-progress-line" id="scrollProgressLine"></div>
-
   <!-- Ambient Sound Sanctuary Player -->
   <div class="ambient-bar" id="ambientBar">
     <div class="container ambient-container">
@@ -44,8 +41,7 @@
 
       <nav class="nav-links" id="navLinks">
         <a href="#about" class="nav-item">The Book</a>
-        <a href="#experience" class="nav-item">3D Experience</a>
-        <a href="#craftsmanship" class="nav-item">The Edition</a>
+        <a href="#edition" class="nav-item">The Edition</a>
         <a href="#pillars" class="nav-item">3 Pillars</a>
         <a href="#audience" class="nav-item">Who It's For</a>
         <a href="#free-ebook" class="nav-item free-ebook-nav"><i class="fa-solid fa-gift"></i> Free Ebook</a>
@@ -69,8 +65,9 @@
   <main>
     <!-- HERO SECTION -->
     <section class="hero-stage" id="about">
-      <div class="hero-bg-glow"></div>
       <div class="container hero-layout">
+        
+        <!-- Left: Copy & Actions -->
         <div class="hero-copy">
           <div class="curated-pill">
             <span class="gold-dot"></span>
@@ -109,89 +106,41 @@
           </div>
         </div>
 
+        <!-- Right: Beautiful Prominent 3D Book -->
         <div class="hero-book-showcase">
-          <div class="book-viewport">
-            <div class="book-photo-card" id="heroBook">
-              <img src="images/IMG_0320%20-%20Edited.png" alt="Quiet Reset by Ladyh Joy O." class="book-mockup-img">
-            </div>
+          <div class="book-card-display">
+            <img src="images/IMG_0320%20-%20Edited.png" alt="Quiet Reset: Rest, Reset, Rebuild by Ladyh Joy O." class="book-mockup-img">
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- APPLE-STYLE PINNED 3D SCROLL SCRUB STAGE -->
-    <section class="apple-scroll-stage" id="experience">
-      <div class="apple-sticky-wrapper">
-        <div class="apple-canvas-container">
-          <!-- Central Pinned 3D Model controlled directly by scroll wheel -->
-          <div class="apple-book-rig" id="appleBookRig">
-            <img src="images/IMG_0320%20-%20Edited.png" alt="Quiet Reset 3D Interactive Model" class="apple-rig-img" id="appleRigImg">
-            <div class="apple-rig-glare" id="appleRigGlare"></div>
-          </div>
-        </div>
-
-        <!-- Scrolling Captions that fade in/out as user scrolls -->
-        <div class="apple-caption-stream">
-          <div class="apple-caption-card" data-step="0">
-            <span class="step-badge">Stage 01</span>
-            <h2>Hold Stillness In Your Hands.</h2>
-            <p>Scroll down to inspect the physical details and design of the Quiet Reset experience.</p>
-          </div>
-
-          <div class="apple-caption-card" data-step="1">
-            <span class="step-badge">Stage 02</span>
-            <h2>Velvet Soft-Touch Hardcover.</h2>
-            <p>Every corner is engineered to invite quiet reflection, with gold leaf foiling and durable Smyth-sewn binding.</p>
-          </div>
-
-          <div class="apple-caption-card" data-step="2">
-            <span class="step-badge">Stage 03</span>
-            <h2>Anchored In Scripture.</h2>
-            <p>Designed as a physical companion for quiet morning devotions and personal prayer retreats.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDITORIAL CRAFTSMANSHIP (quietreset1.jpg) -->
-    <section class="section-craftsmanship" id="craftsmanship">
+    <!-- EDITORIAL PHYSICAL SHOWCASE (quietreset1.jpg) -->
+    <section class="section-editorial" id="edition">
       <div class="container">
-        <div class="craft-grid">
-          <div class="craft-image-frame">
-            <img src="images/quietreset1.jpg" alt="Quiet Reset Physical Presentation" class="editorial-zoom-img">
-            <div class="craft-glass-badge">
-              <i class="fa-solid fa-feather-pointed"></i>
-              <span>Every page crafted with prayer & intention</span>
-            </div>
+        <div class="editorial-grid">
+          <div class="editorial-photo-box">
+            <img src="images/quietreset1.jpg" alt="Quiet Reset Editorial Photography" class="editorial-img">
           </div>
-
-          <div class="craft-content">
-            <span class="section-badge-left">Physical Edition</span>
-            <h2 class="section-main-heading text-left">An Invitation to Stillness</h2>
-            <p class="craft-lead">
-              More than ink and paper. A tactile sanctuary designed to help you step away from digital noise and sit in God's presence.
+          <div class="editorial-text-box">
+            <span class="section-badge-left">The Physical Edition</span>
+            <h2 class="section-main-heading text-left">Crafted for Quietness & Reflection</h2>
+            <p class="editorial-lead">
+              A tactile experience created to invite stillness into your everyday rhythm. Soft-touch matte cover, generous margins for personal journaling, and durable binding made to travel with you into private prayer retreats.
             </p>
-            <div class="craft-features-list">
-              <div class="craft-feature-item">
-                <div class="cf-icon"><i class="fa-solid fa-book"></i></div>
-                <div>
-                  <h4>Velvet Soft-Touch Finish</h4>
-                  <p>A gentle tactile cover that invites quietness into your hands.</p>
-                </div>
+            <div class="feature-bullets">
+              <div class="f-bullet">
+                <i class="fa-solid fa-check"></i>
+                <span>Premium cream bookpaper easy on the eyes during devotions</span>
               </div>
-              <div class="craft-feature-item">
-                <div class="cf-icon"><i class="fa-solid fa-pen-fancy"></i></div>
-                <div>
-                  <h4>Reflective Margin Journaling</h4>
-                  <p>Dedicated space for honest prayers and personal revelations.</p>
-                </div>
+              <div class="f-bullet">
+                <i class="fa-solid fa-check"></i>
+                <span>Includes the commemorative botanical Olive Leaf Bookmark</span>
               </div>
-              <div class="craft-feature-item">
-                <div class="cf-icon"><i class="fa-solid fa-bookmark"></i></div>
-                <div>
-                  <h4>Included Olive Leaf Bookmark</h4>
-                  <p>A daily reminder to breathe and anchor your heart in truth.</p>
-                </div>
+              <div class="f-bullet">
+                <i class="fa-solid fa-check"></i>
+                <span>Practical prompts and reflection questions at every chapter close</span>
               </div>
             </div>
           </div>
@@ -199,32 +148,25 @@
       </div>
     </section>
 
-    <!-- FREE EBOOKS SECTION -->
+    <!-- FREE EBOOK CALLOUT -->
     <section class="section-free-ebook" id="free-ebook">
-      <div class="container free-ebook-container">
-        <div class="free-ebook-card">
-          <div class="free-ebook-content">
-            <span class="free-badge"><i class="fa-solid fa-sparkles"></i> Free Resource</span>
+      <div class="container">
+        <div class="free-banner">
+          <div class="free-text">
+            <span class="free-pill"><i class="fa-solid fa-gift"></i> Free Gift</span>
             <h2>Get 3 Free Faith-Based Ebooks</h2>
-            <p class="free-subtitle">
-              Sometimes, all we need is a <strong>moment to pause, reconnect with God, and take the next step in faith.</strong>
+            <p>
+              Sometimes, all we need is a <strong>moment to pause, reconnect with God, and take the next step in faith.</strong> Access three complimentary ebook guides to support your spiritual walk right now.
             </p>
-            <p class="free-desc">
-              Whether you're starting your walk with Jesus, wanting to grow deeper in faith, or simply needing a quiet reset — these free resources were created to encourage your journey.
-            </p>
-            <div class="free-actions">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScV_Tsy9aFgWkjD40FU2BNlQ_MU_W_yE4KZSp_LJgjoPEra0Q/viewform" target="_blank" rel="noopener" class="btn btn-gold">
-                <i class="fa-solid fa-download"></i>
-                <span>Claim Your Free Ebooks</span>
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-              <span class="instant-note"><i class="fa-solid fa-circle-check"></i> Free instant download form</span>
-            </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScV_Tsy9aFgWkjD40FU2BNlQ_MU_W_yE4KZSp_LJgjoPEra0Q/viewform" target="_blank" rel="noopener" class="btn btn-gold">
+              <i class="fa-solid fa-download"></i>
+              <span>Claim Your Free Ebooks</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
           </div>
-          <div class="free-ebook-graphic">
-            <div class="free-graphic-circle">
-              <i class="fa-solid fa-book-bookmark"></i>
-              <span>FREE<br>EBOOK</span>
+          <div class="free-graphic">
+            <div class="ebook-badge-icon">
+              <i class="fa-solid fa-book-open"></i>
             </div>
           </div>
         </div>
@@ -234,189 +176,129 @@
     <!-- PRAYER REQUEST SECTION -->
     <section class="section-prayer" id="prayer">
       <div class="container">
-        <div class="prayer-card-wrapper">
-          <div class="prayer-content">
-            <span class="prayer-badge"><i class="fa-solid fa-heart"></i> We're Praying With You</span>
-            <h2>You Don't Have To Carry It Alone</h2>
-            <p class="prayer-quote">
-              “Some prayers are spoken out loud. Others stay quietly in our hearts.”
-            </p>
-            <p class="prayer-body">
-              Whatever is on your heart — your hopes, worries, struggles, thanksgiving, or something you're trusting God for — we’d be deeply honored to stand with you in prayer. Your prayer matters. Your story matters. God cares.
-            </p>
-            <div class="prayer-actions">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScDa35Svj_8STI8f0LIuwZ5CTmdiDjW0geGnyNbhVDJzSk7Lg/viewform" target="_blank" rel="noopener" class="btn btn-lux-primary">
-                <i class="fa-solid fa-hands-praying"></i>
-                <span>Send Us Your Prayer Request</span>
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </div>
-          </div>
+        <div class="prayer-box">
+          <span class="section-badge-center"><i class="fa-solid fa-heart"></i> Prayer Sanctuary</span>
+          <h2 class="section-main-heading">You Don't Have To Carry It Alone</h2>
+          <p class="prayer-sub">
+            “Some prayers are spoken out loud. Others stay quietly in our hearts.”
+          </p>
+          <p class="prayer-lead">
+            Whatever season you're in — tears, hopes, questions, or silent burnout — we would be deeply honored to stand in prayer with you. Your prayer matters. God cares.
+          </p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScDa35Svj_8STI8f0LIuwZ5CTmdiDjW0geGnyNbhVDJzSk7Lg/viewform" target="_blank" rel="noopener" class="btn btn-lux-primary">
+            <i class="fa-solid fa-hands-praying"></i>
+            <span>Send Us Your Prayer Request</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- 3 PILLARS SECTION -->
+    <!-- 3 PILLARS -->
     <section class="section-pillars" id="pillars">
       <div class="container">
         <div class="section-badge-center">The Framework</div>
-        <h2 class="section-main-heading">A Pathway From Broken Striving to Deep Peace</h2>
-        <p class="section-sub-heading">Quiet Reset is built upon three transformative movements to guide your weary soul back to authentic stillness.</p>
+        <h2 class="section-main-heading">A Pathway From Striving to Peace</h2>
+        <p class="section-sub-heading">Quiet Reset is built upon three transformative movements to guide your soul back to true stillness.</p>
 
         <div class="pillars-container">
-          <div class="pillar-lux-card">
+          <div class="pillar-card">
             <div class="pillar-number">01</div>
-            <div class="pillar-icon-box"><i class="fa-solid fa-feather"></i></div>
+            <div class="pillar-icon"><i class="fa-solid fa-feather"></i></div>
             <h3>Rest</h3>
             <h4>Cease the Exhausting Strive</h4>
             <p>Find genuine rest in God when everything feels uncertain. Release the unspoken guilt of pausing and acknowledge your fatigue.</p>
-            <ul class="pillar-highlights">
-              <li><i class="fa-solid fa-check"></i> Unpack the guilt of resting</li>
-              <li><i class="fa-solid fa-check"></i> Reclaim quiet solitude as strength</li>
-            </ul>
           </div>
 
-          <div class="pillar-lux-card highlighted">
+          <div class="pillar-card highlighted">
             <div class="pillar-number">02</div>
-            <div class="pillar-icon-box"><i class="fa-solid fa-compass-drafting"></i></div>
+            <div class="pillar-icon"><i class="fa-solid fa-compass-drafting"></i></div>
             <h3>Reset</h3>
             <h4>Untangle Hidden Wounds</h4>
             <p>Reset your heart and mind with biblical truth. Forgive silent betrayals and let God reshape your definitions of victory.</p>
-            <ul class="pillar-highlights">
-              <li><i class="fa-solid fa-check"></i> Acknowledge unspoken pain</li>
-              <li><i class="fa-solid fa-check"></i> Align thinking with eternal worth</li>
-            </ul>
           </div>
 
-          <div class="pillar-lux-card">
+          <div class="pillar-card">
             <div class="pillar-number">03</div>
-            <div class="pillar-icon-box"><i class="fa-solid fa-seedling"></i></div>
+            <div class="pillar-icon"><i class="fa-solid fa-seedling"></i></div>
             <h3>Rebuild</h3>
             <h4>Construct with Eternal Vision</h4>
             <p>Rebuild a sustainable rhythm for your life, family, and calling without sacrificing your soul for worldly milestones.</p>
-            <ul class="pillar-highlights">
-              <li><i class="fa-solid fa-check"></i> Vision rooted in lasting resilience</li>
-              <li><i class="fa-solid fa-check"></i> Guardrails against future burnout</li>
-            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AUDIENCE PROFILES -->
+    <!-- WHO IT'S FOR -->
     <section class="section-audience" id="audience">
       <div class="container">
-        <div class="audience-header-flex">
-          <div>
-            <div class="section-badge-left">Back Cover Excerpt</div>
-            <h2 class="section-main-heading text-left">Who Is This Book For?</h2>
-            <p class="section-sub-heading text-left">Click on any profile below to read Ladyh Joy O.'s personal letter and Scripture anchor.</p>
-          </div>
-          <div class="audience-stats">
-            <span class="stat-number">7</span>
-            <span class="stat-label">Seasons of Silent Struggle</span>
-          </div>
-        </div>
+        <div class="section-badge-center">Back Cover Excerpt</div>
+        <h2 class="section-main-heading">Who Is This Book For?</h2>
+        <p class="section-sub-heading">Click on any card to read Ladyh Joy O.'s personal letter and Scripture anchor for your season.</p>
 
-        <div class="audience-card-grid" id="audienceContainer"></div>
+        <div class="audience-grid" id="audienceContainer"></div>
       </div>
     </section>
 
-    <!-- STORE SECTION -->
+    <!-- STORE / EDITIONS -->
     <section class="section-shop" id="shop">
       <div class="container">
         <div class="section-badge-center">Restoration Store</div>
-        <h2 class="section-main-heading">Choose Your Restoration Bundle</h2>
-        <p class="section-sub-heading">Orders are prepared with botanical wrapping, ribbon packaging, and personal blessing cards.</p>
+        <h2 class="section-main-heading">Choose Your Quiet Reset Journey</h2>
+        <p class="section-sub-heading">All orders include botanical packaging, signature bookmarks, and nationwide courier delivery.</p>
 
-        <div class="bundles-lux-grid">
-          <div class="bundle-lux-card">
-            <div class="bundle-top">
-              <span class="tier-tag">Solo Edition</span>
+        <div class="bundles-grid">
+          <div class="bundle-card">
+            <div class="bundle-head">
+              <span class="bundle-type">Solo Edition</span>
               <h3>Quiet Reset Paperback</h3>
-              <div class="price-display">
-                <span class="currency">₱</span><span class="amount">450</span>
-              </div>
-              <p class="bundle-summary">The complete official paperback edition with soft-touch matte finish and gold-embossed spine details.</p>
+              <div class="price">₱450</div>
+              <p>The complete official 220-page paperback edition with soft-touch matte finish and gold-embossed details.</p>
             </div>
-            <div class="bundle-divider"></div>
-            <ul class="perks-list">
-              <li><i class="fa-solid fa-circle-check"></i> 1x Quiet Reset Book</li>
-              <li><i class="fa-solid fa-circle-check"></i> Botanical Olive Leaf Bookmark</li>
-              <li><i class="fa-solid fa-circle-check"></i> Author Blessing Card</li>
-              <li class="faded"><i class="fa-solid fa-circle-xmark"></i> 90-Day Guided Reflection Journal</li>
+            <ul class="bundle-list">
+              <li><i class="fa-solid fa-check"></i> 1x Quiet Reset Book</li>
+              <li><i class="fa-solid fa-check"></i> Botanical Olive Leaf Bookmark</li>
+              <li><i class="fa-solid fa-check"></i> Dedication & Blessing Card</li>
             </ul>
-            <button class="btn btn-bundle-add add-cart-action" data-id="paperback" data-name="Quiet Reset Paperback" data-price="450">
+            <button class="btn btn-bundle add-cart-action" data-id="paperback" data-name="Quiet Reset Paperback" data-price="450">
               <i class="fa-solid fa-cart-plus"></i> Add to Bag
             </button>
           </div>
 
-          <div class="bundle-lux-card featured">
-            <div class="featured-badge">Most Cherished by Readers</div>
-            <div class="bundle-top">
-              <span class="tier-tag gold">Full Restoration Bundle</span>
+          <div class="bundle-card featured">
+            <div class="bundle-head">
+              <span class="bundle-type gold">Full Restoration Bundle</span>
               <h3>Restoration Journal Set</h3>
-              <div class="price-display">
-                <span class="currency">₱</span><span class="amount">799</span>
-                <span class="strikethrough">₱950</span>
-              </div>
-              <p class="bundle-summary">Created for intentional quiet times, personal retreats, and private prayer journaling.</p>
+              <div class="price">₱799 <span class="old-price">₱950</span></div>
+              <p>Created for deeply intentional quiet times, private prayer retreats, and morning devotions.</p>
             </div>
-            <div class="bundle-divider"></div>
-            <ul class="perks-list">
-              <li><i class="fa-solid fa-circle-check"></i> <strong>1x Signed Quiet Reset Book</strong></li>
-              <li><i class="fa-solid fa-circle-check"></i> <strong>90-Day Guided Reflection Hardbound Journal</strong></li>
-              <li><i class="fa-solid fa-circle-check"></i> Set of 7 Scripture Reflection Art Cards</li>
-              <li><i class="fa-solid fa-circle-check"></i> <strong>FREE Nationwide Express Shipping</strong></li>
+            <ul class="bundle-list">
+              <li><i class="fa-solid fa-check"></i> <strong>1x Signed Quiet Reset Book</strong></li>
+              <li><i class="fa-solid fa-check"></i> <strong>90-Day Guided Hardbound Journal</strong></li>
+              <li><i class="fa-solid fa-check"></i> Set of 7 Scripture Art Cards</li>
+              <li><i class="fa-solid fa-check"></i> <strong>FREE Nationwide Delivery</strong></li>
             </ul>
             <button class="btn btn-bundle-featured add-cart-action" data-id="bundle-set" data-name="Restoration Journal Set" data-price="799">
               <i class="fa-solid fa-gift"></i> Add Bundle to Bag
             </button>
           </div>
 
-          <div class="bundle-lux-card">
-            <div class="bundle-top">
-              <span class="tier-tag">Community & Leaders</span>
+          <div class="bundle-card">
+            <div class="bundle-head">
+              <span class="bundle-type">Community & Ministry</span>
               <h3>Small Group 5-Pack</h3>
-              <div class="price-display">
-                <span class="currency">₱</span><span class="amount">2,100</span>
-                <span class="strikethrough">₱2,250</span>
-              </div>
-              <p class="bundle-summary">Equip your church leaders, small group circles, or workplace wellness cohort.</p>
+              <div class="price">₱2,100 <span class="old-price">₱2,250</span></div>
+              <p>Equip your church leaders, study circles, workplace wellness groups, or couple study teams.</p>
             </div>
-            <div class="bundle-divider"></div>
-            <ul class="perks-list">
-              <li><i class="fa-solid fa-circle-check"></i> 5x Quiet Reset Paperback Books</li>
-              <li><i class="fa-solid fa-circle-check"></i> 6-Week Discussion & Facilitator Guide (PDF)</li>
-              <li><i class="fa-solid fa-circle-check"></i> 5x Official Olive Leaf Bookmarks</li>
-              <li><i class="fa-solid fa-circle-check"></i> <strong>FREE Nationwide Express Shipping</strong></li>
+            <ul class="bundle-list">
+              <li><i class="fa-solid fa-check"></i> 5x Quiet Reset Books</li>
+              <li><i class="fa-solid fa-check"></i> 6-Week Discussion Guide (PDF)</li>
+              <li><i class="fa-solid fa-check"></i> 5x Olive Leaf Bookmarks</li>
+              <li><i class="fa-solid fa-check"></i> <strong>FREE Nationwide Delivery</strong></li>
             </ul>
-            <button class="btn btn-bundle-add add-cart-action" data-id="group-pack" data-name="Small Group 5-Pack" data-price="2100">
+            <button class="btn btn-bundle add-cart-action" data-id="group-pack" data-name="Small Group 5-Pack" data-price="2100">
               <i class="fa-solid fa-cart-plus"></i> Add 5-Pack to Bag
             </button>
-          </div>
-        </div>
-
-        <div class="marketplace-channels-box">
-          <div class="mp-copy">
-            <h4>Prefer Ordering on Your Favorite App?</h4>
-            <p>Enjoy Cash on Delivery (COD) and platform voucher discounts on our verified stores:</p>
-          </div>
-          <div class="mp-buttons">
-            <a href="https://shopee.ph" target="_blank" rel="noopener" class="mp-btn shopee">
-              <i class="fa-solid fa-bag-shopping"></i>
-              <div>
-                <span class="small">Buy On</span>
-                <strong>Shopee Philippines</strong>
-              </div>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener" class="mp-btn tiktok">
-              <i class="fa-brands fa-tiktok"></i>
-              <div>
-                <span class="small">Shop On</span>
-                <strong>TikTok Shop PH</strong>
-              </div>
-            </a>
           </div>
         </div>
       </div>
@@ -424,53 +306,24 @@
 
     <!-- AUTHOR SPOTLIGHT (quietreset2.jpg) -->
     <section class="section-author" id="author">
-      <div class="container author-split">
-        <div class="author-visual-column">
-          <div class="author-frame">
-            <div class="author-photo-card">
-              <img src="images/quietreset2.jpg" alt="Ladyh Joy O. - Author of Quiet Reset" class="author-img-actual">
-              <div class="author-overlay-badge">
-                <span class="author-name-tag">Ladyh Joy O.</span>
-                <span class="author-sub-tag">Author & Speaker</span>
-              </div>
-            </div>
+      <div class="container">
+        <div class="author-layout">
+          <div class="author-image-wrapper">
+            <img src="images/quietreset2.jpg" alt="Ladyh Joy O." class="author-portrait">
           </div>
-          <div class="author-stamp">
-            <i class="fa-solid fa-quote-left"></i>
-            <p>“Pain that was never loud ran deep, but God’s restoration runs deeper.”</p>
-          </div>
-        </div>
-
-        <div class="author-narrative">
-          <div class="section-badge-left">The Voice Behind The Movement</div>
-          <h2 class="section-main-heading text-left">About Ladyh Joy O.</h2>
-          <p class="author-bio-intro">
-            Ladyh Joy O. is a mentor, speaker, and founder of the <strong>Quiet Reset Movement</strong> — an initiative committed to helping leaders, wives, business owners, and ministry servants heal from burnout.
-          </p>
-          <p class="author-bio-body">
-            Having walked through seasons of unexpected loss, ministry disillusionment, and hidden emotional strain, Ladyh writes directly from the trenches of rebuilding. Her work pairs practical emotional health insights with deep scripture to walk readers out of survival mode and into purposeful peace.
-          </p>
-
-          <div class="author-stats-row">
-            <div class="stat-cell">
-              <span class="num">1,000+</span>
-              <span class="lbl">Community Members</span>
+          <div class="author-details">
+            <span class="section-badge-left">The Voice Behind The Movement</span>
+            <h2 class="section-main-heading text-left">About Ladyh Joy O.</h2>
+            <p class="author-lead">
+              Ladyh Joy O. is a mentor, speaker, and founder of the <strong>Quiet Reset Movement</strong> — an initiative committed to helping leaders, wives, business owners, and faith workers heal from burnout.
+            </p>
+            <p class="author-body">
+              Having walked through heavy seasons of personal loss, ministry disillusionment, and hidden emotional strain, Ladyh writes not from ivory-tower theories, but from the trenches of rebuilding. Her work pairs practical emotional health insights with deep scripture to walk readers out of survival mode and into purposeful peace.
+            </p>
+            <div class="author-quote-box">
+              <i class="fa-solid fa-quote-left"></i>
+              <p>“Pain that was never loud ran deep, but God’s restoration runs deeper.”</p>
             </div>
-            <div class="stat-cell">
-              <span class="num">100%</span>
-              <span class="lbl">Nationwide Delivery</span>
-            </div>
-            <div class="stat-cell">
-              <span class="num">3 Pillars</span>
-              <span class="lbl">Rest, Reset, Rebuild</span>
-            </div>
-          </div>
-
-          <div class="author-social-follow">
-            <span>Connect with the author:</span>
-            <a href="https://instagram.com/quietresetofficial" target="_blank" rel="noopener" class="social-pill">
-              <i class="fa-brands fa-instagram"></i> @quietresetofficial
-            </a>
           </div>
         </div>
       </div>
@@ -480,15 +333,14 @@
     <section class="section-reviews" id="reviews">
       <div class="container">
         <div class="section-badge-center">Voices of Restoration</div>
-        <h2 class="section-main-heading">Stories From the Quiet Reset Community</h2>
-        <p class="section-sub-heading">Read how God is using these pages to bring stillness and healing across the country.</p>
+        <h2 class="section-main-heading">Stories From Our Readers</h2>
+        <p class="section-sub-heading">Read how God is using these pages to bring stillness and clarity across the country.</p>
 
-        <div class="reviews-masonry" id="reviewsGrid"></div>
+        <div class="reviews-grid" id="reviewsGrid"></div>
 
-        <div class="submit-review-prompt">
-          <p>Has Quiet Reset spoken to your heart?</p>
+        <div class="review-action-center">
           <button class="btn btn-lux-ghost" id="openReviewBtn">
-            <i class="fa-solid fa-pen-nib"></i> Write Your Review
+            <i class="fa-solid fa-pen-nib"></i> Write Your Testimony
           </button>
         </div>
       </div>
@@ -496,42 +348,37 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="lux-footer">
-    <div class="container footer-content-grid">
-      <div class="footer-col-main">
-        <div class="footer-logo-wrap">
-          <img src="images/quietresetlogo.JPG" alt="Quiet Reset" class="footer-logo-img">
-        </div>
-        <p class="footer-mission">
-          Guiding exhausted hearts back to the restorative presence of God through literature, prayer retreats, and practical leadership workshops.
-        </p>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="images/quietresetlogo.JPG" alt="Quiet Reset" class="footer-logo">
+        <p>A movement dedicated to guiding exhausted hearts back to the tender, restorative presence of God through literature, prayer retreats, and practical leadership workshops.</p>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-links-col">
         <h4>Find In Stores</h4>
-        <ul class="footer-links">
-          <li>Fully Booked branches nationwide</li>
+        <ul>
+          <li>Fully Booked nationwide</li>
           <li>Philippine Christian Bookstore (PCBS)</li>
           <li>OMF Literature distribution</li>
           <li>Official Shopee & TikTok Shops</li>
         </ul>
       </div>
 
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="#about">About The Book</a></li>
-          <li><a href="#experience">3D Experience</a></li>
-          <li><a href="#craftsmanship">The Edition</a></li>
+      <div class="footer-links-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">The Book</a></li>
+          <li><a href="#edition">The Edition</a></li>
           <li><a href="#free-ebook">Free 3 Ebooks</a></li>
           <li><a href="#prayer">Prayer Requests</a></li>
           <li><a href="#pillars">The 3 Pillars</a></li>
-          <li><a href="#shop">Order Online</a></li>
+          <li><a href="#shop">Get The Book</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="container footer-sub">
+    <div class="container footer-bottom">
       <p>&copy; 2026 Quiet Reset by Ladyh Joy O. All Rights Reserved. Manila, Philippines.</p>
       <div class="footer-socials">
         <a href="https://instagram.com/quietresetofficial" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
@@ -541,93 +388,40 @@
 
   <!-- Shopping Cart Drawer -->
   <div class="drawer-backdrop" id="cartBackdrop"></div>
-  <aside class="cart-lux-drawer" id="cartDrawer">
+  <aside class="cart-drawer" id="cartDrawer">
     <div class="drawer-head">
-      <div class="drawer-title-wrap">
-        <h3>Your Shopping Bag</h3>
-        <span class="item-count-tag" id="drawerItemCount">0 items</span>
-      </div>
-      <button class="drawer-close" id="closeCartBtn" aria-label="Close Bag">&times;</button>
+      <h3>Your Bag (<span id="drawerItemCount">0</span>)</h3>
+      <button class="drawer-close" id="closeCartBtn">&times;</button>
     </div>
-
-    <div class="shipping-progress-banner">
-      <div class="shipping-info-row">
-        <span id="shippingStatusLabel">Add ₱799 for FREE nationwide shipping</span>
-        <span class="shipping-pct" id="shippingPctLabel">0%</span>
-      </div>
-      <div class="progress-bar-track">
-        <div class="progress-bar-fill" id="shippingFill" style="width: 0%"></div>
-      </div>
-    </div>
-
     <div class="drawer-body" id="cartItemsList"></div>
-
     <div class="drawer-foot">
-      <div class="coupon-section">
-        <div class="coupon-input-group">
-          <input type="text" id="promoCodeInput" placeholder="Promo code (try RESET10)">
-          <button id="applyPromoBtn">Apply</button>
-        </div>
-        <span class="coupon-applied-note" id="couponNote"></span>
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <strong id="summaryTotal">₱0</strong>
       </div>
-
-      <div class="order-summary-box">
-        <div class="summary-row">
-          <span>Subtotal</span>
-          <span class="price-val" id="summarySubtotal">₱0</span>
-        </div>
-        <div class="summary-row discount-row" id="summaryDiscountRow" style="display: none;">
-          <span>Promo Savings (10%)</span>
-          <span class="price-val text-success" id="summaryDiscount">-₱0</span>
-        </div>
-        <div class="summary-row total-row">
-          <span>Total</span>
-          <span class="price-val total-number" id="summaryTotal">₱0</span>
-        </div>
-      </div>
-
       <button class="btn btn-lux-primary full-width" id="checkoutTriggerBtn">
-        <span>Proceed to Secure Checkout</span>
-        <i class="fa-solid fa-lock"></i>
+        Proceed to Secure Checkout
       </button>
-      <p class="secure-guarantee"><i class="fa-solid fa-shield-halved"></i> GCash, Maya, Debit/Credit Card & COD Supported</p>
     </div>
   </aside>
 
   <!-- Excerpt Modal -->
   <div class="modal-backdrop" id="excerptModal">
-    <div class="modal-lux-card reader-dimension">
-      <div class="modal-lux-header">
-        <div class="reader-header-meta">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
           <span class="pill-badge">Quiet Reset Excerpt</span>
           <h3>Chapter 1: The Sound of an Unraveling</h3>
-          <span class="byline">By Ladyh Joy O.</span>
         </div>
-        <button class="modal-close-btn" id="closeExcerptBtn">&times;</button>
+        <button class="modal-close" id="closeExcerptBtn">&times;</button>
       </div>
-
-      <div class="reader-content-body">
-        <p class="dropcap-paragraph">
-          What happens when the life you built—the success, the ministry, the dreams—starts falling apart, not with a loud crash, but with a quiet unraveling?
-        </p>
-        <p>
-          No one talks about the silent struggles. The weight of unspoken disappointments. The exhaustion of keeping everything together while something inside you is breaking. The questions you’re too afraid to ask out loud:
-        </p>
-        <blockquote class="reader-blockquote">
-          “Did I miss something, Lord? Did I fail? Are You still with me?”
-        </blockquote>
-        <p>
-          We live in a culture that rewards continuous performance, celebrates round-the-clock grinding, and treats depletion like a trophy. We learn how to put on a smiling face for Sunday services, for meetings, for social media feeds, while our inner spirit is hollowed out.
-        </p>
-        <p>
-          In this season of silence, you may feel abandoned. But what if this silence isn’t an ending? What if God is clearing the noise so that your heart can finally hear His whisper?
-        </p>
-        <div class="reader-cta-box">
-          <h4>Continue Reading the Journey</h4>
-          <p>Get the complete paperback edition delivered directly to your door.</p>
-          <button class="btn btn-lux-primary" onclick="window.location.href='#shop'; closeAllModals();">
-            Order Book for ₱450
-          </button>
+      <div class="modal-body">
+        <p class="dropcap">What happens when the life you built—the success, the ministry, the dreams—starts falling apart, not with a loud crash, but with a quiet unraveling?</p>
+        <p>No one talks about the silent struggles. The weight of unspoken disappointments. The exhaustion of keeping everything together while something inside you is breaking.</p>
+        <blockquote class="excerpt-quote">“Did I miss something, Lord? Did I fail? Are You still with me?”</blockquote>
+        <p>In this season of silence, you may feel abandoned. But what if this silence isn’t an ending? What if God is clearing the stage so that your heart can finally hear His whisper?</p>
+        <div class="modal-cta">
+          <a href="#shop" class="btn btn-lux-primary" onclick="closeAllModals()">Order Complete Book — ₱450</a>
         </div>
       </div>
     </div>
@@ -635,82 +429,52 @@
 
   <!-- Review Modal -->
   <div class="modal-backdrop" id="reviewModal">
-    <div class="modal-lux-card">
-      <div class="modal-lux-header">
-        <div>
-          <h3>Leave a Quiet Reset Testimony</h3>
-          <p class="modal-subtitle">Share how this message impacted your walk.</p>
-        </div>
-        <button class="modal-close-btn" id="closeReviewModalBtn">&times;</button>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Share Your Testimony</h3>
+        <button class="modal-close" id="closeReviewModalBtn">&times;</button>
       </div>
-
-      <form id="reviewSubmissionForm" class="lux-form">
-        <div class="form-row">
-          <label for="revName">Full Name</label>
-          <input type="text" id="revName" required placeholder="e.g., Katherine Cruz">
-        </div>
-        <div class="form-row">
-          <label for="revRole">Your Season / Calling</label>
-          <input type="text" id="revRole" required placeholder="e.g., Worship Leader, Entrepreneur, Mother">
-        </div>
-        <div class="form-row">
-          <label for="revRating">Rating</label>
-          <select id="revRating">
-            <option value="5">★★★★★ (5 Stars — Deeply Life-Changing)</option>
-            <option value="4">★★★★☆ (4 Stars — Truly Encouraging)</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label for="revComment">Your Reflection</label>
-          <textarea id="revComment" rows="4" required placeholder="What part of the book spoke most directly to your heart?"></textarea>
-        </div>
-        <button type="submit" class="btn btn-lux-primary full-width">Publish Testimony</button>
+      <form id="reviewSubmissionForm" class="modal-form">
+        <label>Your Name</label>
+        <input type="text" id="revName" required placeholder="e.g. Maria Santos">
+        <label>Your Season / Calling</label>
+        <input type="text" id="revRole" required placeholder="e.g. Mother, Entrepreneur, Ministry Leader">
+        <label>Your Testimony</label>
+        <textarea id="revComment" rows="4" required placeholder="How has Quiet Reset spoken to your journey?"></textarea>
+        <button type="submit" class="btn btn-lux-primary">Publish Testimony</button>
       </form>
     </div>
   </div>
 
   <!-- Checkout Modal -->
   <div class="modal-backdrop" id="checkoutModal">
-    <div class="modal-lux-card">
-      <div class="modal-lux-header">
-        <div>
-          <h3>Checkout Order</h3>
-          <p class="modal-subtitle">Complete your details for nationwide courier dispatch.</p>
-        </div>
-        <button class="modal-close-btn" id="closeCheckoutBtn">&times;</button>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Direct Courier Order</h3>
+        <button class="modal-close" id="closeCheckoutBtn">&times;</button>
       </div>
-
-      <form id="checkoutForm" class="lux-form">
-        <div class="form-row">
-          <label>Recipient Name</label>
-          <input type="text" required placeholder="Complete legal name">
-        </div>
-        <div class="form-row">
-          <label>Mobile Number (for Courier SMS)</label>
-          <input type="tel" required placeholder="0917 XXX XXXX">
-        </div>
-        <div class="form-row">
-          <label>Complete Shipping Address</label>
-          <textarea rows="2" required placeholder="Unit/House No., Street, Barangay, City, Province"></textarea>
-        </div>
-        <div class="form-row">
-          <label>Payment Method</label>
-          <select required>
-            <option value="gcash">GCash (QR Code generated on next step)</option>
-            <option value="maya">Maya</option>
-            <option value="card">Credit / Debit Card</option>
-            <option value="cod">Cash on Delivery (COD)</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-lux-primary full-width">Confirm & Place Order</button>
+      <form id="checkoutForm" class="modal-form">
+        <label>Complete Name</label>
+        <input type="text" required placeholder="Recipient name">
+        <label>Mobile Number (for Courier SMS)</label>
+        <input type="tel" required placeholder="0917 XXX XXXX">
+        <label>Complete Delivery Address</label>
+        <textarea rows="2" required placeholder="House / Unit No., Street, Barangay, City, Province"></textarea>
+        <label>Payment Method</label>
+        <select required>
+          <option value="gcash">GCash (QR provided upon confirmation)</option>
+          <option value="maya">Maya</option>
+          <option value="cod">Cash on Delivery (COD)</option>
+        </select>
+        <button type="submit" class="btn btn-lux-primary">Confirm & Dispatch Order</button>
       </form>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="lux-toast" id="luxToast">
+  <!-- Toast -->
+  <div class="toast" id="luxToast">
     <i class="fa-solid fa-circle-check"></i>
-    <span id="toastMessage">Item added to your bag</span>
+    <span id="toastMessage">Item added</span>
   </div>
 
   <script src="script.js"></script>
