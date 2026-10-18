@@ -61,7 +61,7 @@ let reviewsList = [
     name: "Atty. Christine V.",
     role: "Corporate Counsel & Ministry Leader",
     stars: 5,
-    quote: "I started reading Chapter 1 at 11 PM and couldn't put it down. Ladyh articulate the precise ache of someone who looks successful on the outside but is dying of exhaustion on the inside."
+    quote: "I started reading Chapter 1 at 11 PM and couldn't put it down. Ladyh articulates the precise ache of someone who looks successful on the outside but is dying of exhaustion on the inside."
   },
   {
     name: "Rev. Marco Santos",
@@ -377,9 +377,9 @@ function toggleAmbientSound() {
       const gainNode = audioContext.createGain();
 
       osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(174, audioContext.currentTime); // 174Hz peaceful ground
+      osc1.frequency.setValueAtTime(174, audioContext.currentTime);
       osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(261.63, audioContext.currentTime); // C4
+      osc2.frequency.setValueAtTime(261.63, audioContext.currentTime);
 
       gainNode.gain.setValueAtTime(0.04, audioContext.currentTime);
 

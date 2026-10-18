@@ -111,7 +111,7 @@ body {
   color: var(--c-gold-400);
 }
 
-/* Container */
+/* Layout Utilities */
 .container {
   width: 92%;
   max-width: 1240px;
@@ -255,7 +255,7 @@ body {
 }
 
 /* ==========================================================================
-   HERO SECTION & IMAGE 3D TILT ENGINE
+   HERO STAGE & BUTTONS
    ========================================================================== */
 
 .hero-stage {
@@ -410,7 +410,7 @@ body {
 }
 
 /* ==========================================================================
-   IMAGE SHOWCASE WITH SPECULAR LIGHTING & 3D TILT
+   TRANSPARENT BOOK SHOWCASE & 3D TILT
    ========================================================================== */
 
 .hero-book-showcase {
@@ -438,15 +438,15 @@ body {
   transform: rotateX(6deg) rotateY(-8deg);
   transition: transform 0.15s ease-out;
   will-change: transform;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 25px 45px rgba(18, 36, 25, 0.15);
+  background: transparent;
+  box-shadow: none;
 }
 
 .book-mockup-img {
   width: 100%;
   height: auto;
   display: block;
+  filter: drop-shadow(0 20px 35px rgba(18, 36, 25, 0.22));
   pointer-events: none;
   user-select: none;
 }
@@ -471,7 +471,7 @@ body {
 }
 
 /* ==========================================================================
-   SECTIONS COMMON STYLES
+   SECTIONS & GRIDS
    ========================================================================== */
 
 .section-pillars, .section-audience, .section-shop, .section-author, .section-reviews {
@@ -530,7 +530,6 @@ body {
   margin: 0 0 40px;
 }
 
-/* Pillars Grid */
 .pillars-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -625,7 +624,7 @@ body {
 }
 
 /* ==========================================================================
-   WHO IS THIS BOOK FOR? SECTION
+   AUDIENCE SECTION (BACK COVER)
    ========================================================================== */
 
 .section-audience {
@@ -760,7 +759,7 @@ body {
 }
 
 /* ==========================================================================
-   BUNDLES & SHOP SECTION
+   BUNDLES & STORE SECTION
    ========================================================================== */
 
 .bundles-lux-grid {
@@ -924,7 +923,6 @@ body {
   background: var(--c-forest-900);
 }
 
-/* Marketplace Channels Box */
 .marketplace-channels-box {
   background: var(--c-cream-200);
   border: 1px solid var(--c-border);
@@ -1134,7 +1132,7 @@ body {
 }
 
 /* ==========================================================================
-   REVIEWS & TESTIMONIES
+   REVIEWS & MASONRY
    ========================================================================== */
 
 .reviews-masonry {
@@ -1194,7 +1192,7 @@ body {
 }
 
 /* ==========================================================================
-   CART DRAWER & MODALS
+   DRAWER & MODALS
    ========================================================================== */
 
 .drawer-backdrop, .modal-backdrop {
@@ -1255,7 +1253,6 @@ body {
   line-height: 1;
 }
 
-/* Free Shipping Banner */
 .shipping-progress-banner {
   background: var(--c-sage-50);
   border-bottom: 1px solid var(--c-sage-100);
@@ -1398,7 +1395,7 @@ body {
   margin-top: 12px;
 }
 
-/* Modals */
+/* Reader Modal Dimensions */
 .modal-backdrop.active {
   display: flex;
   align-items: center;
