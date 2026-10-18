@@ -1,8 +1,77 @@
 /* ==========================================================================
-   QUIET RESET — SCRIPT ENGINE
+   QUIET RESET — SCRIPT ENGINE WITH 13 OFFICIAL FAQS & 2026 WORKSHOPS
    ========================================================================== */
 
-// 1. Audience Profiles from the Back Cover
+// 1. All 13 Official FAQs from Quiet Reset
+const faqData = [
+  {
+    num: "1",
+    question: "What is Quiet Reset about?",
+    answer: "It's a book about healing, renewal, and rebuilding life after silent battles—whether in business, marriage, ministry, or personal struggles. It shares real-life experiences and biblical principles to help readers reset with God's strength."
+  },
+  {
+    num: "2",
+    question: "Who is this book for?",
+    answer: "It's for leaders, entrepreneurs, couples, and even ordinary believers who may look successful outside but feel broken, tired, or empty inside. It's also for anyone who silently struggles with pain, rejection, burnout, or feeling distant from God."
+  },
+  {
+    num: "3",
+    question: "Why is it called Quiet Reset?",
+    answer: "Because healing often begins in silence—not in noise or busyness. The book teaches how to pause, be still before God, and allow Him to reset your life from the inside out."
+  },
+  {
+    num: "4",
+    question: "Is this a business book or a spiritual book?",
+    answer: "It's both. It comes from the real journey of business owners and ministry leaders who faced collapse, betrayal, and burnout. It mixes practical lessons with biblical wisdom—making it relatable for entrepreneurs, professionals, and church leaders."
+  },
+  {
+    num: "5",
+    question: "What makes this book different from other self-help or Christian books?",
+    answer: "Unlike books that only talk about success, Quiet Reset shares unfiltered struggles—financial failures, ministry wounds, even marital pain—and shows how God restores step by step. It's raw, personal, and filled with both stories and Scripture."
+  },
+  {
+    num: "6",
+    question: "What will I gain from reading this book?",
+    answer: "Clarity in identifying silent struggles (business, emotional, spiritual, marital). Biblical strategies for healing and restoration. Practical steps to reset your life and rebuild stronger. Encouragement that you are not alone—your pain has purpose."
+  },
+  {
+    num: "7",
+    question: "Is it only for Christians?",
+    answer: "No. While it's deeply rooted in Scripture, the lessons are practical for anyone going through struggles in business, family, or personal life. The heart of the book is hope, healing, and wisdom that anyone can apply."
+  },
+  {
+    num: "8",
+    question: "What inspired the author to write Quiet Reset?",
+    answer: "It was born out of a season of loss and collapse, when everything seemed to fall apart—business, ministry, even marriage. In that silence, God revealed truths that became the foundation of this book."
+  },
+  {
+    num: "9",
+    question: "How is the book structured?",
+    answer: "It's written in chapters that mirror real-life seasons—Silent Pain, Silent Success, Silent Rest, and Silent Reset to Rebuild—each with stories, lessons, verses, and practical applications."
+  },
+  {
+    num: "10",
+    question: "How long is the book?",
+    answer: "Around 300+ pages, but written in a very conversational and simple style, making it easy to read yet deeply reflective."
+  },
+  {
+    num: "11",
+    question: "Can I use this book for group study or discipleship?",
+    answer: "Yes. Each chapter includes lessons and reflections that can be used for personal journaling, couples' discussions, or even church small groups."
+  },
+  {
+    num: "12",
+    question: "Is this book part of a series?",
+    answer: "Yes. Quiet Reset is the first in the Reset Collection, which includes future works like Love Reset and Business Baon Reset."
+  },
+  {
+    num: "13",
+    question: "Does the book include prayers or guides?",
+    answer: "Yes. At the end of sections, there are prayers and reflections to help readers process and apply the lessons personally."
+  }
+];
+
+// 2. Audience Profiles from the Back Cover
 const audienceData = [
   {
     icon: "fa-battery-quarter",
@@ -55,7 +124,7 @@ const audienceData = [
   }
 ];
 
-// 2. Real Reader Reviews
+// 3. Reader Reviews
 const reviewsList = [
   {
     name: "Atty. Christine V.",
@@ -77,19 +146,50 @@ const reviewsList = [
   }
 ];
 
-// 3. Cart State
+// 4. Cart State
 let cart = [];
 let isAudioPlaying = false;
 let audioContext = null;
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
+  renderFaqAccordion();
   renderAudienceCards();
   renderReviews();
   setupEventListeners();
 });
 
-// Render Audience
+// Render FAQ Accordion
+function renderFaqAccordion() {
+  const container = document.getElementById("faqAccordion");
+  if (!container) return;
+
+  container.innerHTML = faqData.map((faq, index) => {
+    return `
+      <div class="faq-item-card ${index === 0 ? 'active' : ''}" id="faq-card-${index}">
+        <button class="faq-question-btn" onclick="toggleFaq(${index})">
+          <div class="faq-q-left">
+            <span class="faq-num-pill">${faq.num}</span>
+            <h4>${faq.question}</h4>
+          </div>
+          <i class="fa-solid fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer-pane">
+          <p>${faq.answer}</p>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function toggleFaq(index) {
+  const card = document.getElementById(`faq-card-${index}`);
+  if (card) {
+    card.classList.toggle("active");
+  }
+}
+
+// Render Audience Cards
 function renderAudienceCards() {
   const container = document.getElementById("audienceContainer");
   if (!container) return;
