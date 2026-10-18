@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — NATURAL LUXURY BOTANICAL EDITORIAL WITH AUTO-SLIDING GALLERY
+   QUIET RESET — SALES FUNNEL DESIGN SYSTEM
    ========================================================================== */
 
 :root {
@@ -578,7 +578,7 @@ body {
 }
 
 /* ==========================================================================
-   CONTINUOUS AUTO-SLIDING COMMUNITY WORKSHOP CAROUSEL (event1-5.JPG)
+   PURE CONTINUOUS AUTO-SLIDING MARQUEE (NO TEXT LABELS)
    ========================================================================== */
 
 .section-community-gallery {
@@ -664,19 +664,6 @@ body {
 
 .gallery-photo-card:hover img {
   transform: scale(1.06);
-}
-
-.gallery-caption-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 16px 14px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(18, 36, 25, 0.88) 100%);
-  color: #ffffff;
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
 }
 
 .gallery-hint {
@@ -777,6 +764,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin-bottom: 28px;
 }
 
 .f-bullet {
@@ -1191,13 +1179,14 @@ body {
 }
 
 /* ==========================================================================
-   BUNDLES & STORE
+   BUNDLES & STORE (CONVERSION ENGINE)
    ========================================================================== */
 
 .bundles-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+  align-items: stretch;
 }
 
 .bundle-card {
@@ -1208,6 +1197,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
   transition: var(--transition);
 }
 
@@ -1218,6 +1208,22 @@ body {
 
 .bundle-card.featured {
   border: 2px solid var(--c-forest-800);
+  transform: scale(1.02);
+}
+
+.featured-badge-tag {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--c-forest-800);
+  color: var(--c-gold-400);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
 }
 
 .bundle-type {
@@ -1292,6 +1298,71 @@ body {
 
 .btn-bundle-featured:hover {
   background: var(--c-forest-900);
+}
+
+.marketplace-trust-box {
+  background: var(--c-cream-200);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 36px;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mp-copy h4 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--c-forest-900);
+  margin-bottom: 4px;
+}
+
+.mp-copy p {
+  color: var(--c-text-muted);
+  font-size: 0.92rem;
+}
+
+.mp-buttons {
+  display: flex;
+  gap: 14px;
+}
+
+.mp-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid var(--c-border);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--c-text-main);
+  transition: var(--transition);
+}
+
+.mp-btn:hover {
+  border-color: var(--c-forest-800);
+  transform: translateY(-2px);
+}
+
+.mp-btn i {
+  font-size: 1.4rem;
+}
+
+.mp-btn.shopee i {
+  color: #ee4d2d;
+}
+
+.mp-btn.tiktok i {
+  color: #000;
+}
+
+.mp-btn .small {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
 }
 
 /* ==========================================================================
@@ -1632,12 +1703,18 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .hero-layout, .editorial-grid, .free-banner, .author-layout, .footer-grid {
+  .hero-layout, .editorial-grid, .free-banner, .author-layout, .footer-grid, .marketplace-trust-box {
     grid-template-columns: 1fr;
+  }
+
+  .marketplace-trust-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
   }
 
   .event-item-row {
@@ -1675,6 +1752,10 @@ body {
 
   .pillars-container, .bundles-grid {
     grid-template-columns: 1fr;
+  }
+
+  .bundle-card.featured {
+    transform: none;
   }
 
   .nav-links {

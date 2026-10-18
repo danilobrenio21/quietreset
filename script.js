@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — SCRIPT ENGINE WITH 13 OFFICIAL FAQS & 2026 WORKSHOPS
+   QUIET RESET — SCRIPT ENGINE WITH 13 OFFICIAL FAQS & SALES CART
    ========================================================================== */
 
 // 1. All 13 Official FAQs from Quiet Reset
@@ -325,13 +325,13 @@ function setupEventListeners() {
   if (soundToggle) soundToggle.addEventListener("click", toggleAmbientSound);
 }
 
-// Shopping Bag
+// Shopping Bag Mechanics
 function addToBag(id, name, price) {
   const existing = cart.find((item) => item.id === id);
   if (existing) {
     existing.qty += 1;
   } else {
-    cart.push({ id, name, price, qty: 1 });
+    cart.push({ id: id, name: name, price: price, qty: 1 });
   }
   updateCartDrawer();
   openCartDrawer();
@@ -406,7 +406,7 @@ function showToast(msg) {
   }, 2500);
 }
 
-// Gentle Ambient Sound
+// Ambient Sound Simulator
 function toggleAmbientSound() {
   const btn = document.getElementById("soundStatus");
   if (!isAudioPlaying) {
