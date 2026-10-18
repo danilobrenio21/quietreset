@@ -255,21 +255,25 @@ body {
 }
 
 /* ==========================================================================
-   HERO STAGE & BUTTONS
+   BALANCED HERO STAGE (50/50 PROPORTION)
    ========================================================================== */
 
 .hero-stage {
   position: relative;
-  padding: 70px 0 100px;
-  background: radial-gradient(circle at 80% 20%, rgba(232, 239, 233, 0.6) 0%, rgba(253, 252, 247, 1) 75%);
+  padding: 75px 0 100px;
+  background: radial-gradient(circle at 75% 30%, rgba(232, 239, 233, 0.7) 0%, rgba(253, 252, 247, 1) 75%);
   overflow: hidden;
 }
 
 .hero-layout {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 60px;
+  gap: 40px;
+}
+
+.hero-copy {
+  max-width: 580px;
 }
 
 .curated-pill {
@@ -295,7 +299,7 @@ body {
 
 .hero-heading {
   font-family: var(--font-serif);
-  font-size: 3.5rem;
+  font-size: 3.4rem;
   line-height: 1.15;
   color: var(--c-forest-900);
   margin-bottom: 24px;
@@ -320,7 +324,7 @@ body {
   line-height: 1.75;
   color: var(--c-text-muted);
   margin-bottom: 36px;
-  max-width: 580px;
+  max-width: 540px;
 }
 
 .hero-actions {
@@ -410,7 +414,7 @@ body {
 }
 
 /* ==========================================================================
-   TRANSPARENT BOOK SHOWCASE & 3D TILT
+   LARGER 3D BOOK SHOWCASE ENGINE
    ========================================================================== */
 
 .hero-book-showcase {
@@ -418,22 +422,23 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .book-viewport {
   width: 100%;
-  max-width: 480px;
-  perspective: 1200px;
+  max-width: 620px;
+  perspective: 1400px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .book-photo-card {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 580px;
   transform-style: preserve-3d;
   transform: rotateX(6deg) rotateY(-8deg);
   transition: transform 0.15s ease-out;
@@ -446,7 +451,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 20px 35px rgba(18, 36, 25, 0.22));
+  filter: drop-shadow(0 25px 45px rgba(18, 36, 25, 0.24));
   pointer-events: none;
   user-select: none;
 }
@@ -454,7 +459,7 @@ body {
 .photo-glare {
   position: absolute;
   inset: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
   opacity: 0;
   pointer-events: none;
@@ -462,7 +467,7 @@ body {
 }
 
 .hint-3d {
-  margin-top: 18px;
+  margin-top: 14px;
   font-size: 0.82rem;
   color: var(--c-text-muted);
   display: flex;
@@ -471,7 +476,7 @@ body {
 }
 
 /* ==========================================================================
-   SECTIONS & GRIDS
+   SECTIONS & PILLARS
    ========================================================================== */
 
 .section-pillars, .section-audience, .section-shop, .section-author, .section-reviews {
@@ -1132,7 +1137,7 @@ body {
 }
 
 /* ==========================================================================
-   REVIEWS & MASONRY
+   REVIEWS & TESTIMONIES
    ========================================================================== */
 
 .reviews-masonry {
@@ -1192,7 +1197,7 @@ body {
 }
 
 /* ==========================================================================
-   DRAWER & MODALS
+   CART DRAWER & MODALS
    ========================================================================== */
 
 .drawer-backdrop, .modal-backdrop {
@@ -1395,7 +1400,7 @@ body {
   margin-top: 12px;
 }
 
-/* Reader Modal Dimensions */
+/* Modals */
 .modal-backdrop.active {
   display: flex;
   align-items: center;
@@ -1607,30 +1612,97 @@ body {
   font-size: 1.1rem;
 }
 
-/* Responsive */
+/* ==========================================================================
+   RESPONSIVE (DESKTOP, TABLET & MOBILE VIEWPORTS)
+   ========================================================================== */
+
 @media (max-width: 980px) {
   .hero-layout, .author-split, .footer-content-grid {
     grid-template-columns: 1fr;
   }
+
+  .hero-layout {
+    gap: 48px;
+    text-align: center;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .hero-heading {
     font-size: 2.8rem;
   }
+
+  .hero-lead {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stockist-tray {
+    width: 100%;
+  }
+
+  .stockist-logos {
+    justify-content: center;
+  }
+
   .hero-book-showcase {
     order: -1;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
+
+  .book-viewport {
+    max-width: 460px;
+  }
+
+  .book-photo-card {
+    max-width: 400px;
+    transform: rotateX(4deg) rotateY(-4deg);
+  }
+
   .pillars-container, .bundles-lux-grid {
     grid-template-columns: 1fr;
   }
+
   .bundle-lux-card.featured {
     transform: none;
   }
+
   .marketplace-channels-box {
     flex-direction: column;
     gap: 20px;
     text-align: center;
   }
+
   .nav-links {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-heading {
+    font-size: 2.2rem;
+  }
+
+  .book-viewport {
+    max-width: 340px;
+  }
+
+  .book-photo-card {
+    max-width: 310px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
   }
 }
