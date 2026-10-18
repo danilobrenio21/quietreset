@@ -11,13 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Ambient Sound / Meditation Player Widget -->
+  <!-- Ambient Sound Sanctuary Player -->
   <div class="ambient-bar" id="ambientBar">
     <div class="container ambient-container">
       <div class="ambient-left">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <!-- Main Navbar -->
+  <!-- Header / Navigation -->
   <header class="navbar-wrapper">
     <div class="container navbar">
       <a href="#" class="brand-identity">
@@ -60,359 +60,313 @@
           </span>
           <span class="bag-label">My Bag</span>
         </button>
-
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-stage">
-    <div class="hero-bg-glow"></div>
-    <div class="container hero-layout">
-      
-      <!-- Left Column: Copy & Value Proposition -->
-      <div class="hero-copy">
-        <div class="curated-pill">
-          <span class="gold-dot"></span>
-          <span>Bestselling Purpose-Driven Book Nationwide</span>
+  <main>
+    <!-- Hero Section with Linked Mockup Image -->
+    <section class="hero-stage" id="about">
+      <div class="hero-bg-glow"></div>
+      <div class="container hero-layout">
+        
+        <!-- Left: Copy & CTAs -->
+        <div class="hero-copy">
+          <div class="curated-pill">
+            <span class="gold-dot"></span>
+            <span>Bestselling Purpose-Driven Book Nationwide</span>
+          </div>
+
+          <h1 class="hero-heading">
+            Maybe this silence <br>
+            <span class="italicized">isn’t the end.</span> <br>
+            Maybe it’s God’s invitation to a <span class="highlight-serif">new beginning.</span>
+          </h1>
+
+          <p class="hero-lead">
+            What happens when the life you built begins unraveling, not with a loud crash, but in quiet exhaustion? <strong>Ladyh Joy O.</strong> guides you through a raw journey of unspoken loss, deep surrender, and biblical restoration.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#shop" class="btn btn-lux-primary">
+              <span>Order Your Copy — ₱450</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <button class="btn btn-lux-ghost" id="heroExcerptBtn">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>Read Chapter 1</span>
+            </button>
+          </div>
+
+          <div class="stockist-tray">
+            <span class="tray-label">Official nationwide stockists:</span>
+            <div class="stockist-logos">
+              <span class="stockist-tag"><i class="fa-solid fa-store"></i> Fully Booked</span>
+              <span class="stockist-tag"><i class="fa-solid fa-church"></i> PCBS</span>
+              <span class="stockist-tag"><i class="fa-solid fa-book"></i> OMF Literature</span>
+              <span class="stockist-tag"><i class="fa-solid fa-bag-shopping"></i> Shopee & TikTok</span>
+            </div>
+          </div>
         </div>
 
-        <h1 class="hero-heading">
-          Maybe this silence <br>
-          <span class="italicized">isn’t the end.</span> <br>
-          Maybe it’s God’s invitation to a <span class="highlight-serif">new beginning.</span>
-        </h1>
-
-        <p class="hero-lead">
-          What happens when the life you built begins unraveling, not with a loud crash, but in quiet exhaustion? <strong>Ladyh Joy O.</strong> takes you through a raw journey of unspoken loss, deep surrender, and biblical restoration.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#shop" class="btn btn-lux-primary">
-            <span>Order Your Copy — ₱450</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-          <button class="btn btn-lux-ghost" id="heroExcerptBtn">
-            <i class="fa-solid fa-book-open-reader"></i>
-            <span>Read Chapter 1</span>
-          </button>
+        <!-- Right: Real Image with Interactive 3D Cursor Engine -->
+        <div class="hero-book-showcase">
+          <div class="book-viewport" id="bookViewport">
+            <div class="book-photo-card" id="book3d">
+              <img src="images/IMG_0320.JPG" alt="Quiet Reset: Rest, Reset, Rebuild by Ladyh Joy O." class="book-mockup-img" id="bookImage">
+              <div class="photo-glare" id="photoGlare"></div>
+            </div>
+          </div>
+          <p class="hint-3d"><i class="fa-solid fa-arrows-up-down-left-right"></i> Move your cursor to inspect cover</p>
         </div>
 
-        <!-- Trust Badges & Retailers -->
-        <div class="stockist-tray">
-          <span class="tray-label">Official nationwide stockists:</span>
-          <div class="stockist-logos">
-            <span class="stockist-tag"><i class="fa-solid fa-store"></i> Fully Booked</span>
-            <span class="stockist-tag"><i class="fa-solid fa-church"></i> PCBS</span>
-            <span class="stockist-tag"><i class="fa-solid fa-book"></i> OMF Literature</span>
-            <span class="stockist-tag"><i class="fa-solid fa-bag-shopping"></i> Shopee & TikTok</span>
+      </div>
+    </section>
+
+    <!-- The 3 Pillars Section -->
+    <section class="section-pillars" id="pillars">
+      <div class="container">
+        <div class="section-badge-center">The Framework</div>
+        <h2 class="section-main-heading">A Pathway From Broken Striving to Deep Peace</h2>
+        <p class="section-sub-heading">Quiet Reset is built upon three transformative movements to guide your weary soul back to authentic stillness.</p>
+
+        <div class="pillars-container">
+          <div class="pillar-lux-card">
+            <div class="pillar-number">01</div>
+            <div class="pillar-icon-box"><i class="fa-solid fa-feather"></i></div>
+            <h3>Rest</h3>
+            <h4>Cease the Exhausting Strive</h4>
+            <p>Find genuine rest in God when everything feels uncertain. Release the unspoken guilt of pausing and acknowledge your fatigue.</p>
+            <ul class="pillar-highlights">
+              <li><i class="fa-solid fa-check"></i> Unpack the guilt of resting</li>
+              <li><i class="fa-solid fa-check"></i> Reclaim quiet solitude as strength</li>
+            </ul>
+          </div>
+
+          <div class="pillar-lux-card highlighted">
+            <div class="pillar-number">02</div>
+            <div class="pillar-icon-box"><i class="fa-solid fa-compass-drafting"></i></div>
+            <h3>Reset</h3>
+            <h4>Untangle Hidden Wounds</h4>
+            <p>Reset your heart and mind with biblical truth. Forgive silent betrayals and let God reshape your definitions of victory.</p>
+            <ul class="pillar-highlights">
+              <li><i class="fa-solid fa-check"></i> Acknowledge unspoken pain</li>
+              <li><i class="fa-solid fa-check"></i> Align thinking with eternal worth</li>
+            </ul>
+          </div>
+
+          <div class="pillar-lux-card">
+            <div class="pillar-number">03</div>
+            <div class="pillar-icon-box"><i class="fa-solid fa-seedling"></i></div>
+            <h3>Rebuild</h3>
+            <h4>Construct with Eternal Vision</h4>
+            <p>Rebuild a sustainable rhythm for your life, family, and calling without sacrificing your soul for worldly milestones.</p>
+            <ul class="pillar-highlights">
+              <li><i class="fa-solid fa-check"></i> Vision rooted in lasting resilience</li>
+              <li><i class="fa-solid fa-check"></i> Guardrails against future burnout</li>
+            </ul>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Right Column: Interactive 3D Hardcover Mockup -->
-      <div class="hero-book-showcase">
-        <div class="book-viewport" id="bookViewport">
-          <div class="book-3d-model" id="book3d">
-            <!-- Book Spine -->
-            <div class="book-side spine">
-              <span class="spine-text">Quiet Reset • Rest • Reset • Rebuild • Ladyh O.</span>
+    <!-- Interactive Audience Section (From Back Cover) -->
+    <section class="section-audience" id="audience">
+      <div class="container">
+        <div class="audience-header-flex">
+          <div>
+            <div class="section-badge-left">Back Cover Excerpt</div>
+            <h2 class="section-main-heading text-left">Who Is This Book For?</h2>
+            <p class="section-sub-heading text-left">Click on any profile below to read Ladyh Joy O.'s personal letter and Scripture anchor.</p>
+          </div>
+          <div class="audience-stats">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Seasons of Silent Struggle</span>
+          </div>
+        </div>
+
+        <div class="audience-card-grid" id="audienceContainer"></div>
+      </div>
+    </section>
+
+    <!-- Bundles & E-Commerce Section -->
+    <section class="section-shop" id="shop">
+      <div class="container">
+        <div class="section-badge-center">Restoration Store</div>
+        <h2 class="section-main-heading">Choose Your Restoration Bundle</h2>
+        <p class="section-sub-heading">Orders are prepared with botanical wrapping, ribbon packaging, and personal blessing cards.</p>
+
+        <div class="bundles-lux-grid">
+          <!-- Standard Edition -->
+          <div class="bundle-lux-card">
+            <div class="bundle-top">
+              <span class="tier-tag">Solo Edition</span>
+              <h3>Quiet Reset Paperback</h3>
+              <div class="price-display">
+                <span class="currency">₱</span><span class="amount">450</span>
+              </div>
+              <p class="bundle-summary">The complete official paperback edition with soft-touch matte finish and gold-embossed spine details.</p>
             </div>
-            <!-- Book Front Cover -->
-            <div class="book-side front">
-              <div class="cover-art-container">
-                <div class="botanical-graphic">
-                  <!-- Custom SVG Olive Tree matching the actual cover -->
-                  <svg viewBox="0 0 400 460" class="olive-tree-vector">
-                    <path class="tree-trunk" d="M195 440 C190 350 170 300 160 250 C150 200 130 180 110 160 C90 140 85 100 85 80 C95 90 115 110 135 125 C145 105 150 85 155 60 C165 80 170 100 175 120 C185 95 195 70 200 40 C205 65 208 90 208 115 C220 95 235 75 255 55 C250 80 240 105 230 125 C245 115 265 105 285 100 C270 120 250 140 235 155 C255 160 280 170 300 180 C275 190 250 195 230 195 C235 250 220 340 205 440 Z" fill="#2d4a36"/>
-                    <g class="foliage-group" fill="#3b5e47" opacity="0.85">
-                      <ellipse cx="140" cy="110" rx="45" ry="20" transform="rotate(-30 140 110)" />
-                      <ellipse cx="190" cy="80" rx="55" ry="22" transform="rotate(-10 190 80)" />
-                      <ellipse cx="240" cy="100" rx="45" ry="20" transform="rotate(25 240 100)" />
-                      <ellipse cx="210" cy="135" rx="50" ry="24" transform="rotate(15 210 135)" />
-                      <ellipse cx="160" cy="145" rx="45" ry="20" transform="rotate(-20 160 145)" />
-                      <ellipse cx="270" cy="140" rx="40" ry="18" transform="rotate(35 270 140)" />
-                      <ellipse cx="115" cy="150" rx="35" ry="16" transform="rotate(-40 115 150)" />
-                    </g>
-                  </svg>
-                </div>
-                <div class="cover-text-group">
-                  <h2 class="book-cover-title">Quiet<br>Reset</h2>
-                  <p class="book-cover-sub">Rest | Reset | Rebuild</p>
-                  <span class="book-cover-author">LADYH O.</span>
-                </div>
+            <div class="bundle-divider"></div>
+            <ul class="perks-list">
+              <li><i class="fa-solid fa-circle-check"></i> 1x Quiet Reset Book</li>
+              <li><i class="fa-solid fa-circle-check"></i> Botanical Olive Leaf Bookmark</li>
+              <li><i class="fa-solid fa-circle-check"></i> Author Blessing Card</li>
+              <li class="faded"><i class="fa-solid fa-circle-xmark"></i> 90-Day Guided Reflection Journal</li>
+            </ul>
+            <button class="btn btn-bundle-add add-cart-action" data-id="paperback" data-name="Quiet Reset Paperback" data-price="450">
+              <i class="fa-solid fa-cart-plus"></i> Add to Bag
+            </button>
+          </div>
+
+          <!-- Featured Restoration Bundle -->
+          <div class="bundle-lux-card featured">
+            <div class="featured-badge">Most Cherished by Readers</div>
+            <div class="bundle-top">
+              <span class="tier-tag gold">Full Restoration Bundle</span>
+              <h3>Restoration Journal Set</h3>
+              <div class="price-display">
+                <span class="currency">₱</span><span class="amount">799</span>
+                <span class="strikethrough">₱950</span>
+              </div>
+              <p class="bundle-summary">Created for intentional quiet times, personal retreats, and private prayer journaling.</p>
+            </div>
+            <div class="bundle-divider"></div>
+            <ul class="perks-list">
+              <li><i class="fa-solid fa-circle-check"></i> <strong>1x Signed Quiet Reset Book</strong></li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>90-Day Guided Reflection Hardbound Journal</strong></li>
+              <li><i class="fa-solid fa-circle-check"></i> Set of 7 Scripture Reflection Art Cards</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>FREE Nationwide Express Shipping</strong></li>
+            </ul>
+            <button class="btn btn-bundle-featured add-cart-action" data-id="bundle-set" data-name="Restoration Journal Set" data-price="799">
+              <i class="fa-solid fa-gift"></i> Add Bundle to Bag
+            </button>
+          </div>
+
+          <!-- Group & Ministry 5-Pack -->
+          <div class="bundle-lux-card">
+            <div class="bundle-top">
+              <span class="tier-tag">Community & Leaders</span>
+              <h3>Small Group 5-Pack</h3>
+              <div class="price-display">
+                <span class="currency">₱</span><span class="amount">2,100</span>
+                <span class="strikethrough">₱2,250</span>
+              </div>
+              <p class="bundle-summary">Equip your church leaders, small group circles, or workplace wellness cohort.</p>
+            </div>
+            <div class="bundle-divider"></div>
+            <ul class="perks-list">
+              <li><i class="fa-solid fa-circle-check"></i> 5x Quiet Reset Paperback Books</li>
+              <li><i class="fa-solid fa-circle-check"></i> 6-Week Discussion & Facilitator Guide (PDF)</li>
+              <li><i class="fa-solid fa-circle-check"></i> 5x Official Olive Leaf Bookmarks</li>
+              <li><i class="fa-solid fa-circle-check"></i> <strong>FREE Nationwide Express Shipping</strong></li>
+            </ul>
+            <button class="btn btn-bundle-add add-cart-action" data-id="group-pack" data-name="Small Group 5-Pack" data-price="2100">
+              <i class="fa-solid fa-cart-plus"></i> Add 5-Pack to Bag
+            </button>
+          </div>
+        </div>
+
+        <!-- Marketplace Links -->
+        <div class="marketplace-channels-box">
+          <div class="mp-copy">
+            <h4>Prefer Ordering on Your Favorite App?</h4>
+            <p>Enjoy Cash on Delivery (COD) and platform voucher discounts on our verified stores:</p>
+          </div>
+          <div class="mp-buttons">
+            <a href="https://shopee.ph" target="_blank" rel="noopener" class="mp-btn shopee">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <div>
+                <span class="small">Buy On</span>
+                <strong>Shopee Philippines</strong>
+              </div>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="mp-btn tiktok">
+              <i class="fa-brands fa-tiktok"></i>
+              <div>
+                <span class="small">Shop On</span>
+                <strong>TikTok Shop PH</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Author Spotlight -->
+    <section class="section-author" id="author">
+      <div class="container author-split">
+        <div class="author-visual-column">
+          <div class="author-frame">
+            <div class="author-image-aesthetic">
+              <div class="botanical-silhouette">
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+              <div class="author-overlay-badge">
+                <span class="author-name-tag">Ladyh Joy O.</span>
+                <span class="author-sub-tag">Author & Speaker</span>
               </div>
             </div>
-            <!-- Book Page Edge Thickness -->
-            <div class="book-side pages-right"></div>
-            <div class="book-side pages-bottom"></div>
           </div>
-          <div class="book-ambient-shadow"></div>
-        </div>
-        <p class="hint-3d"><i class="fa-solid fa-arrows-up-down-left-right"></i> Move your cursor to inspect cover</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- The 3 Pillars Section -->
-  <section class="section-pillars" id="pillars">
-    <div class="container">
-      <div class="section-badge-center">The Framework</div>
-      <h2 class="section-main-heading">A Pathway From Broken Striving to Deep Peace</h2>
-      <p class="section-sub-heading">Quiet Reset is not just a self-help manual; it is a movement of restoration anchored in practical psychology, vulnerability, and scripture.</p>
-
-      <div class="pillars-container">
-        <!-- Pillar 1 -->
-        <div class="pillar-lux-card">
-          <div class="pillar-number">01</div>
-          <div class="pillar-icon-box"><i class="fa-solid fa-feather"></i></div>
-          <h3>Rest</h3>
-          <h4>Cease the Exhausting Strive</h4>
-          <p>Find authentic rest in God when everything feels uncertain. Dismantle the unspoken guilt that telling yourself it’s unsafe to pause.</p>
-          <ul class="pillar-highlights">
-            <li><i class="fa-solid fa-check"></i> Unpacking the guilt of resting</li>
-            <li><i class="fa-solid fa-check"></i> Reclaiming quiet solitude as strength</li>
-          </ul>
+          <div class="author-stamp">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>“Pain that was never loud ran deep, but God’s restoration runs deeper.”</p>
+          </div>
         </div>
 
-        <!-- Pillar 2 -->
-        <div class="pillar-lux-card highlighted">
-          <div class="card-glow"></div>
-          <div class="pillar-number">02</div>
-          <div class="pillar-icon-box"><i class="fa-solid fa-compass-drafting"></i></div>
-          <h3>Reset</h3>
-          <h4>Untangle the Hidden Wounds</h4>
-          <p>Reset your heart and mind with biblical truth. Re-evaluate expectations, forgive silent betrayal, and let God rewrite your definitions of success.</p>
-          <ul class="pillar-highlights">
-            <li><i class="fa-solid fa-check"></i> Acknowledging hidden disappointments</li>
-            <li><i class="fa-solid fa-check"></i> Aligning thoughts with God’s identity</li>
-          </ul>
-        </div>
+        <div class="author-narrative">
+          <div class="section-badge-left">The Voice Behind The Movement</div>
+          <h2 class="section-main-heading text-left">About Ladyh Joy O.</h2>
+          <p class="author-bio-intro">
+            Ladyh Joy O. is a mentor, speaker, and founder of the <strong>Quiet Reset Movement</strong> — an initiative committed to helping leaders, wives, business owners, and ministry servants heal from burnout.
+          </p>
+          <p class="author-bio-body">
+            Having walked through seasons of unexpected loss, ministry disillusionment, and hidden emotional strain, Ladyh writes directly from the trenches of rebuilding. Her work pairs practical emotional health insights with deep scripture to walk readers out of survival mode and into purposeful peace.
+          </p>
 
-        <!-- Pillar 3 -->
-        <div class="pillar-lux-card">
-          <div class="pillar-number">03</div>
-          <div class="pillar-icon-box"><i class="fa-solid fa-seedling"></i></div>
-          <h3>Rebuild</h3>
-          <h4>Construct with Eternal Vision</h4>
-          <p>Rebuild a sustainable rhythm for your life, marriage, ministry, and career that doesn't sacrifice your soul for external milestones.</p>
-          <ul class="pillar-highlights">
-            <li><i class="fa-solid fa-check"></i> Vision rooted in lasting resilience</li>
-            <li><i class="fa-solid fa-check"></i> Guardrails against future burnout</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive "Who Is This Book For?" Section -->
-  <section class="section-audience" id="audience">
-    <div class="container">
-      <div class="audience-header-flex">
-        <div>
-          <div class="section-badge-left">Back Cover Excerpt</div>
-          <h2 class="section-main-heading text-left">Who Is This Book For?</h2>
-          <p class="section-sub-heading text-left">Click on any profile below to read Ladyh Joy O.'s personal letter and Scripture anchor for your season.</p>
-        </div>
-        <div class="audience-stats">
-          <span class="stat-number">7</span>
-          <span class="stat-label">Specific Seasons of Silent Struggle</span>
-        </div>
-      </div>
-
-      <div class="audience-card-grid" id="audienceContainer">
-        <!-- Rendered dynamically by script.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive E-Commerce & Bundles Section -->
-  <section class="section-shop" id="shop">
-    <div class="container">
-      <div class="section-badge-center">Restoration Store</div>
-      <h2 class="section-main-heading">Choose Your Quiet Reset Journey</h2>
-      <p class="section-sub-heading">Orders are shipped with custom botanical packaging, ribbon wrapping, and handwritten blessing cards.</p>
-
-      <div class="bundles-lux-grid">
-
-        <!-- Bundle 1: Standard Paperback -->
-        <div class="bundle-lux-card">
-          <div class="bundle-top">
-            <span class="tier-tag">Solo Edition</span>
-            <h3>Quiet Reset Paperback</h3>
-            <div class="price-display">
-              <span class="currency">₱</span><span class="amount">450</span>
+          <div class="author-stats-row">
+            <div class="stat-cell">
+              <span class="num">1,000+</span>
+              <span class="lbl">Community Members</span>
             </div>
-            <p class="bundle-summary">The complete official 220-page paperback edition with soft-touch matte finish and gold-embossed details.</p>
+            <div class="stat-cell">
+              <span class="num">100%</span>
+              <span class="lbl">Nationwide Delivery</span>
+            </div>
+            <div class="stat-cell">
+              <span class="num">3 Pillars</span>
+              <span class="lbl">Rest, Reset, Rebuild</span>
+            </div>
           </div>
-          <div class="bundle-divider"></div>
-          <ul class="perks-list">
-            <li><i class="fa-solid fa-circle-check"></i> 1x Quiet Reset Book</li>
-            <li><i class="fa-solid fa-circle-check"></i> Botanical Olive Leaf Bookmark</li>
-            <li><i class="fa-solid fa-circle-check"></i> Author’s Restoration Dedication Card</li>
-            <li class="faded"><i class="fa-solid fa-circle-xmark"></i> 90-Day Guided Reflection Journal</li>
-          </ul>
-          <button class="btn btn-bundle-add add-cart-action" data-id="paperback" data-name="Quiet Reset Paperback" data-price="450">
-            <i class="fa-solid fa-cart-plus"></i> Add to Bag
+
+          <div class="author-social-follow">
+            <span>Connect with the author:</span>
+            <a href="https://instagram.com/quietresetofficial" target="_blank" rel="noopener" class="social-pill">
+              <i class="fa-brands fa-instagram"></i> @quietresetofficial
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section-reviews" id="reviews">
+      <div class="container">
+        <div class="section-badge-center">Voices of Restoration</div>
+        <h2 class="section-main-heading">Stories From the Quiet Reset Community</h2>
+        <p class="section-sub-heading">Read how God is using these pages to bring stillness and healing across the country.</p>
+
+        <div class="reviews-masonry" id="reviewsGrid"></div>
+
+        <div class="submit-review-prompt">
+          <p>Has Quiet Reset spoken to your heart?</p>
+          <button class="btn btn-lux-ghost" id="openReviewBtn">
+            <i class="fa-solid fa-pen-nib"></i> Write Your Review
           </button>
         </div>
-
-        <!-- Bundle 2: Most Popular Companion Set -->
-        <div class="bundle-lux-card featured">
-          <div class="featured-badge">Most Cherished by Readers</div>
-          <div class="bundle-top">
-            <span class="tier-tag gold">Full Restoration Bundle</span>
-            <h3>Restoration Journal Set</h3>
-            <div class="price-display">
-              <span class="currency">₱</span><span class="amount">799</span>
-              <span class="strikethrough">₱950</span>
-            </div>
-            <p class="bundle-summary">Created for deeply intentional quiet times, private prayer retreats, and inner healing.</p>
-          </div>
-          <div class="bundle-divider"></div>
-          <ul class="perks-list">
-            <li><i class="fa-solid fa-circle-check"></i> <strong>1x Signed Quiet Reset Book</strong></li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>90-Day Guided Reflection Hardbound Journal</strong></li>
-            <li><i class="fa-solid fa-circle-check"></i> Set of 7 Scripture Meditation Art Cards</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>FREE Nationwide Express Shipping</strong></li>
-          </ul>
-          <button class="btn btn-bundle-featured add-cart-action" data-id="bundle-set" data-name="Restoration Journal Set" data-price="799">
-            <i class="fa-solid fa-gift"></i> Add Bundle to Bag
-          </button>
-        </div>
-
-        <!-- Bundle 3: Group & Ministry Pack -->
-        <div class="bundle-lux-card">
-          <div class="bundle-top">
-            <span class="tier-tag">Community & Leaders</span>
-            <h3>Small Group 5-Pack</h3>
-            <div class="price-display">
-              <span class="currency">₱</span><span class="amount">2,100</span>
-              <span class="strikethrough">₱2,250</span>
-            </div>
-            <p class="bundle-summary">For pastors, ministry teams, couple study circles, and corporate workplace wellness circles.</p>
-          </div>
-          <div class="bundle-divider"></div>
-          <ul class="perks-list">
-            <li><i class="fa-solid fa-circle-check"></i> 5x Quiet Reset Paperback Books</li>
-            <li><i class="fa-solid fa-circle-check"></i> Complete 6-Week Leader Facilitator Guide (PDF)</li>
-            <li><i class="fa-solid fa-circle-check"></i> 5x Official Olive Leaf Bookmarks</li>
-            <li><i class="fa-solid fa-circle-check"></i> <strong>FREE Nationwide Express Shipping</strong></li>
-          </ul>
-          <button class="btn btn-bundle-add add-cart-action" data-id="group-pack" data-name="Small Group 5-Pack" data-price="2100">
-            <i class="fa-solid fa-cart-plus"></i> Add 5-Pack to Bag
-          </button>
-        </div>
-
       </div>
-
-      <!-- Marketplace Alternative Checkouts -->
-      <div class="marketplace-channels-box">
-        <div class="mp-copy">
-          <h4>Prefer Ordering on Your Favorite App?</h4>
-          <p>Get COD, voucher discounts, and loyalty coins on our verified flagship stores:</p>
-        </div>
-        <div class="mp-buttons">
-          <a href="https://shopee.ph" target="_blank" rel="noopener" class="mp-btn shopee">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <div>
-              <span class="small">Buy On</span>
-              <strong>Shopee Philippines</strong>
-            </div>
-          </a>
-          <a href="https://tiktok.com" target="_blank" rel="noopener" class="mp-btn tiktok">
-            <i class="fa-brands fa-tiktok"></i>
-            <div>
-              <span class="small">Shop On</span>
-              <strong>TikTok Shop PH</strong>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Author Spotlight -->
-  <section class="section-author" id="author">
-    <div class="container author-split">
-      <div class="author-visual-column">
-        <div class="author-frame">
-          <div class="author-image-aesthetic">
-            <div class="botanical-silhouette">
-              <i class="fa-solid fa-seedling"></i>
-            </div>
-            <div class="author-overlay-badge">
-              <span class="author-name-tag">Ladyh Joy O.</span>
-              <span class="author-sub-tag">Author & Speaker</span>
-            </div>
-          </div>
-        </div>
-        <div class="author-stamp">
-          <i class="fa-solid fa-quote-left"></i>
-          <p>“Pain that was never loud ran deep, but God’s restoration runs deeper.”</p>
-        </div>
-      </div>
-
-      <div class="author-narrative">
-        <div class="section-badge-left">The Voice Behind The Movement</div>
-        <h2 class="section-main-heading text-left">About Ladyh Joy O.</h2>
-        <p class="author-bio-intro">
-          Ladyh Joy O. is a mentor, speaker, and founder of the <strong>Quiet Reset Movement</strong> — an initiative committed to helping leaders, wives, business owners, and faith workers heal from burnout.
-        </p>
-        <p class="author-bio-body">
-          Having walked through heavy seasons of personal loss, ministry disillusionment, and hidden emotional strain, Ladyh writes not from ivory-tower theories, but from the trenches of rebuilding. Her book blends practical emotional health insights with unapologetic biblical foundations to walk readers out of survival mode and into purposeful peace.
-        </p>
-
-        <div class="author-stats-row">
-          <div class="stat-cell">
-            <span class="num">1,000+</span>
-            <span class="lbl">Community Members</span>
-          </div>
-          <div class="stat-cell">
-            <span class="num">100%</span>
-            <span class="lbl">Nationwide Delivery</span>
-          </div>
-          <div class="stat-cell">
-            <span class="num">3 Pillars</span>
-            <span class="lbl">Rest, Reset, Rebuild</span>
-          </div>
-        </div>
-
-        <div class="author-social-follow">
-          <span>Connect with the author:</span>
-          <a href="https://instagram.com/quietresetofficial" target="_blank" rel="noopener" class="social-pill">
-            <i class="fa-brands fa-instagram"></i> @quietresetofficial
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Community Testimonies -->
-  <section class="section-reviews" id="reviews">
-    <div class="container">
-      <div class="section-badge-center">Voices of Restoration</div>
-      <h2 class="section-main-heading">Stories From the Quiet Reset Community</h2>
-      <p class="section-sub-heading">See how God is using these pages to bring stillness and clarity across the Philippines.</p>
-
-      <div class="reviews-masonry" id="reviewsGrid">
-        <!-- Injected via script.js -->
-      </div>
-
-      <div class="submit-review-prompt">
-        <p>Has Quiet Reset spoken to your journey?</p>
-        <button class="btn btn-lux-ghost" id="openReviewBtn">
-          <i class="fa-solid fa-pen-nib"></i> Write Your Review
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="lux-footer">
@@ -426,14 +380,14 @@
           </div>
         </div>
         <p class="footer-mission">
-          A movement dedicated to guiding exhausted hearts back to the tender, restorative presence of God through literature, prayer retreats, and practical leadership workshops.
+          Guiding exhausted hearts back to the restorative presence of God through literature, prayer retreats, and practical leadership workshops.
         </p>
       </div>
 
       <div class="footer-col">
         <h4>Find In Stores</h4>
         <ul class="footer-links">
-          <li>Fully Booked nationwide</li>
+          <li>Fully Booked branches nationwide</li>
           <li>Philippine Christian Bookstore (PCBS)</li>
           <li>OMF Literature distribution</li>
           <li>Official Shopee & TikTok Shops</li>
@@ -441,7 +395,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Navigation</h4>
+        <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="#about">About The Book</a></li>
           <li><a href="#pillars">The 3 Pillars</a></li>
@@ -456,12 +410,11 @@
       <p>&copy; 2026 Quiet Reset by Ladyh Joy O. All Rights Reserved. Manila, Philippines.</p>
       <div class="footer-socials">
         <a href="https://instagram.com/quietresetofficial" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://facebook.com" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
       </div>
     </div>
   </footer>
 
-  <!-- Slide-Over Shopping Cart Drawer -->
+  <!-- Slide-out Shopping Cart Drawer -->
   <div class="drawer-backdrop" id="cartBackdrop"></div>
   <aside class="cart-lux-drawer" id="cartDrawer">
     <div class="drawer-head">
@@ -472,7 +425,6 @@
       <button class="drawer-close" id="closeCartBtn" aria-label="Close Bag">&times;</button>
     </div>
 
-    <!-- Free Shipping Progress Indicator -->
     <div class="shipping-progress-banner">
       <div class="shipping-info-row">
         <span id="shippingStatusLabel">Add ₱799 for FREE nationwide shipping</span>
@@ -483,12 +435,8 @@
       </div>
     </div>
 
-    <!-- Cart Items Stream -->
-    <div class="drawer-body" id="cartItemsList">
-      <!-- Items dynamically populated -->
-    </div>
+    <div class="drawer-body" id="cartItemsList"></div>
 
-    <!-- Cart Footer & Checkout -->
     <div class="drawer-foot">
       <div class="coupon-section">
         <div class="coupon-input-group">
@@ -544,14 +492,14 @@
           “Did I miss something, Lord? Did I fail? Are You still with me?”
         </blockquote>
         <p>
-          We live in a culture that rewards continuous performance, celebrate round-the-clock grinding, and treats depletion like a trophy. We learn how to put on a smiling face for Sunday services, for team meetings, for social media feeds, while our inner spirit is hollowed out.
+          We live in a culture that rewards continuous performance, celebrates round-the-clock grinding, and treats depletion like a trophy. We learn how to put on a smiling face for Sunday services, for meetings, for social media feeds, while our inner spirit is hollowed out.
         </p>
         <p>
-          In this season of silence, you may feel abandoned. But what if this silence isn’t an ending? What if God is clearing the stage so that your heart can finally hear His whisper?
+          In this season of silence, you may feel abandoned. But what if this silence isn’t an ending? What if God is clearing the noise so that your heart can finally hear His whisper?
         </p>
         <div class="reader-cta-box">
           <h4>Continue Reading the Journey</h4>
-          <p>Get the complete paperback edition delivered directly to your home.</p>
+          <p>Get the complete paperback edition delivered directly to your door.</p>
           <button class="btn btn-lux-primary" onclick="window.location.href='#shop'; closeAllModals();">
             Order Book for ₱450
           </button>
@@ -560,7 +508,7 @@
     </div>
   </div>
 
-  <!-- Review Submission Modal -->
+  <!-- Review Modal -->
   <div class="modal-backdrop" id="reviewModal">
     <div class="modal-lux-card">
       <div class="modal-lux-header">
@@ -596,7 +544,7 @@
     </div>
   </div>
 
-  <!-- Checkout Demo Modal -->
+  <!-- Checkout Modal -->
   <div class="modal-backdrop" id="checkoutModal">
     <div class="modal-lux-card">
       <div class="modal-lux-header">
@@ -623,7 +571,7 @@
         <div class="form-row">
           <label>Payment Method</label>
           <select required>
-            <option value="gcash">GCash (QR Code on next step)</option>
+            <option value="gcash">GCash (QR Code generated on next step)</option>
             <option value="maya">Maya</option>
             <option value="card">Credit / Debit Card</option>
             <option value="cod">Cash on Delivery (COD)</option>
@@ -634,7 +582,7 @@
     </div>
   </div>
 
-  <!-- Toast Notification System -->
+  <!-- Toast Notification -->
   <div class="lux-toast" id="luxToast">
     <i class="fa-solid fa-circle-check"></i>
     <span id="toastMessage">Item added to your bag</span>

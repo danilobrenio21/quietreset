@@ -55,7 +55,7 @@ const audienceData = [
   }
 ];
 
-// 2. Initial Real Reader Reviews
+// 2. Real Reader Reviews
 let reviewsList = [
   {
     name: "Atty. Christine V.",
@@ -83,7 +83,7 @@ let discount = 0;
 let isAudioPlaying = false;
 let audioContext;
 
-// DOM Initialization
+// Initialization
 document.addEventListener("DOMContentLoaded", () => {
   renderAudienceCards();
   renderReviews();
@@ -132,30 +132,42 @@ function renderReviews() {
   `).join("");
 }
 
-// Realistic 3D Tilt Physics for Hardcover Model
+// 3D Tilt Physics and Specular Light Reflection Engine
 function setup3DBookTilt() {
   const viewport = document.getElementById("bookViewport");
-  const book = document.getElementById("book3d");
+  const card = document.getElementById("book3d");
+  const glare = document.getElementById("photoGlare");
 
-  if (!viewport || !book) return;
+  if (!viewport || !card) return;
 
   viewport.addEventListener("mousemove", (e) => {
     const rect = viewport.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    const rotX = -(y / rect.height) * 35;
-    const rotY = (x / rect.width) * 35 - 15;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-    book.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    const rotateX = -((y - centerY) / centerY) * 14;
+    const rotateY = ((x - centerX) / centerX) * 14;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+    if (glare) {
+      glare.style.opacity = "0.4";
+      glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%)`;
+    }
   });
 
   viewport.addEventListener("mouseleave", () => {
-    book.style.transform = "rotateY(-22deg) rotateX(10deg)";
+    card.style.transform = `perspective(1000px) rotateX(6deg) rotateY(-8deg) scale3d(1, 1, 1)`;
+    if (glare) {
+      glare.style.opacity = "0";
+    }
   });
 }
 
-// Event Listeners Configuration
+// Event Listeners
 function setupEventListeners() {
   // Cart Drawer
   document.getElementById("bagTrigger").addEventListener("click", openCartDrawer);
@@ -236,11 +248,11 @@ function setupEventListeners() {
     alert("Blessings! Your order has been placed. You will receive an SMS shipping confirmation with your tracking code.");
   });
 
-  // Ambient Audio Simulator (Synthetic peaceful binaural tone)
+  // Sanctuary Audio Generator
   document.getElementById("soundToggle").addEventListener("click", toggleAmbientSound);
 }
 
-// Shopping Bag Management
+// Shopping Bag Mechanics
 function addToBag(id, name, price) {
   const existing = cart.find(item => item.id === id);
   if (existing) {
@@ -267,7 +279,7 @@ function updateCartDrawer() {
 
   const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
   countBadge.innerText = totalItems;
-  drawerCount.innerText = `${totalItems}${totalItems === 1 ? 'item' : 'items'}`;
+  drawerCount.innerText = `${totalItems} ${totalItems === 1 ? 'item' : 'items'}`;
 
   if (cart.length === 0) {
     listEl.innerHTML = `<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>`;
@@ -352,7 +364,7 @@ function showToast(msg) {
   }, 2800);
 }
 
-// Gentle Sanctuary Ambient Tone Generator
+// Gentle Ambient Tone Generator
 function toggleAmbientSound() {
   const btn = document.getElementById("soundStatus");
   if (!isAudioPlaying) {
@@ -360,13 +372,12 @@ function toggleAmbientSound() {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       audioContext = new AudioContext();
       
-      // Warm chord oscillators
       const osc1 = audioContext.createOscillator();
       const osc2 = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
       osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(174, audioContext.currentTime); // Solfeggio healing frequency 174Hz
+      osc1.frequency.setValueAtTime(174, audioContext.currentTime); // 174Hz peaceful ground
       osc2.type = 'triangle';
       osc2.frequency.setValueAtTime(261.63, audioContext.currentTime); // C4
 
