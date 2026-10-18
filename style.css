@@ -111,14 +111,14 @@ body {
   color: var(--c-gold-400);
 }
 
-/* Layout Utilities */
+/* Container */
 .container {
   width: 92%;
   max-width: 1240px;
   margin: 0 auto;
 }
 
-/* Navbar */
+/* Navbar & Logo */
 .navbar-wrapper {
   position: sticky;
   top: 0;
@@ -133,57 +133,31 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 12px 0;
 }
 
 .brand-identity {
   display: flex;
   align-items: center;
-  gap: 14px;
   text-decoration: none;
-  color: var(--c-forest-900);
 }
 
-.brand-monogram {
-  width: 42px;
-  height: 42px;
-  background: var(--c-forest-800);
-  color: var(--c-gold-400);
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--c-gold-500);
+.navbar-logo-img {
+  height: 54px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.25s ease;
 }
 
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-title {
-  font-family: var(--font-serif);
-  font-size: 1.55rem;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: 0.5px;
-}
-
-.brand-tagline {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--c-gold-600);
-  font-weight: 600;
+.brand-identity:hover .navbar-logo-img {
+  transform: scale(1.03);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
 }
 
 .nav-item {
@@ -196,6 +170,11 @@ body {
 
 .nav-item:hover {
   color: var(--c-sage-600);
+}
+
+.nav-item.free-ebook-nav {
+  color: var(--c-gold-600);
+  font-weight: 600;
 }
 
 .nav-item.buy-highlight {
@@ -255,25 +234,25 @@ body {
 }
 
 /* ==========================================================================
-   BALANCED HERO STAGE (50/50 PROPORTION)
+   HERO STAGE WITH ENLARGED (HAND-PROPORTIONED) 3D BOOK
    ========================================================================== */
 
 .hero-stage {
   position: relative;
-  padding: 75px 0 100px;
+  padding: 60px 0 90px;
   background: radial-gradient(circle at 75% 30%, rgba(232, 239, 233, 0.7) 0%, rgba(253, 252, 247, 1) 75%);
   overflow: hidden;
 }
 
 .hero-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.05fr;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
 }
 
 .hero-copy {
-  max-width: 580px;
+  max-width: 560px;
 }
 
 .curated-pill {
@@ -299,7 +278,7 @@ body {
 
 .hero-heading {
   font-family: var(--font-serif);
-  font-size: 3.4rem;
+  font-size: 3.3rem;
   line-height: 1.15;
   color: var(--c-forest-900);
   margin-bottom: 24px;
@@ -320,18 +299,18 @@ body {
 }
 
 .hero-lead {
-  font-size: 1.12rem;
+  font-size: 1.1rem;
   line-height: 1.75;
   color: var(--c-text-muted);
-  margin-bottom: 36px;
-  max-width: 540px;
+  margin-bottom: 34px;
+  max-width: 520px;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-bottom: 48px;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
 .btn {
@@ -339,7 +318,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 28px;
+  padding: 14px 26px;
   border-radius: var(--radius-pill);
   font-size: 0.95rem;
   font-weight: 600;
@@ -375,9 +354,21 @@ body {
   transform: translateY(-2px);
 }
 
+.btn-gold {
+  background: var(--c-gold-500);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(184, 151, 88, 0.35);
+}
+
+.btn-gold:hover {
+  background: var(--c-gold-600);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
 .stockist-tray {
   border-top: 1px solid var(--c-border);
-  padding-top: 24px;
+  padding-top: 20px;
 }
 
 .tray-label {
@@ -414,7 +405,7 @@ body {
 }
 
 /* ==========================================================================
-   LARGER 3D BOOK SHOWCASE ENGINE
+   EXTRA LARGE 3D BOOK SHOWCASE ENGINE (MATCHES HAND PROPORTIONS)
    ========================================================================== */
 
 .hero-book-showcase {
@@ -427,8 +418,8 @@ body {
 
 .book-viewport {
   width: 100%;
-  max-width: 620px;
-  perspective: 1400px;
+  max-width: 660px;
+  perspective: 1600px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -438,9 +429,9 @@ body {
 .book-photo-card {
   position: relative;
   width: 100%;
-  max-width: 580px;
+  max-width: 620px;
   transform-style: preserve-3d;
-  transform: rotateX(6deg) rotateY(-8deg);
+  transform: rotateX(6deg) rotateY(-8deg) scale(1.08);
   transition: transform 0.15s ease-out;
   will-change: transform;
   background: transparent;
@@ -451,7 +442,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 25px 45px rgba(18, 36, 25, 0.24));
+  filter: drop-shadow(0 30px 50px rgba(18, 36, 25, 0.28));
   pointer-events: none;
   user-select: none;
 }
@@ -459,7 +450,7 @@ body {
 .photo-glare {
   position: absolute;
   inset: 0;
-  border-radius: 14px;
+  border-radius: 16px;
   background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
   opacity: 0;
   pointer-events: none;
@@ -476,11 +467,176 @@ body {
 }
 
 /* ==========================================================================
-   SECTIONS & PILLARS
+   FREE EBOOK SECTION
+   ========================================================================== */
+
+.section-free-ebook {
+  padding: 40px 0 60px;
+}
+
+.free-ebook-card {
+  background: linear-gradient(135deg, var(--c-forest-900) 0%, var(--c-forest-800) 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 16px 40px rgba(18, 36, 25, 0.25);
+  border: 1px solid rgba(184, 151, 88, 0.3);
+}
+
+.free-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(184, 151, 88, 0.2);
+  color: var(--c-gold-400);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.free-ebook-content h2 {
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.free-subtitle {
+  font-size: 1.05rem;
+  color: var(--c-cream-300);
+  margin-bottom: 12px;
+}
+
+.free-desc {
+  font-size: 0.95rem;
+  color: #b0c2b5;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.free-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.instant-note {
+  font-size: 0.85rem;
+  color: var(--c-cream-300);
+}
+
+.instant-note i {
+  color: var(--c-gold-400);
+}
+
+.free-ebook-graphic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.free-graphic-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 2px dashed var(--c-gold-400);
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--c-gold-400);
+  gap: 10px;
+}
+
+.free-graphic-circle i {
+  font-size: 2.5rem;
+}
+
+.free-graphic-circle span {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   PRAYER REQUEST SECTION
+   ========================================================================== */
+
+.section-prayer {
+  padding: 30px 0 70px;
+}
+
+.prayer-card-wrapper {
+  background: var(--c-cream-200);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  text-align: center;
+}
+
+.prayer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--c-sage-100);
+  color: var(--c-forest-800);
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.prayer-content h2 {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: var(--c-forest-900);
+  margin-bottom: 12px;
+}
+
+.prayer-quote {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--c-gold-600);
+  margin-bottom: 16px;
+}
+
+.prayer-body {
+  font-size: 1rem;
+  color: var(--c-text-muted);
+  max-width: 680px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+.prayer-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   PILLARS & AUDIENCE
    ========================================================================== */
 
 .section-pillars, .section-audience, .section-shop, .section-author, .section-reviews {
-  padding: 100px 0;
+  padding: 90px 0;
 }
 
 .section-badge-center {
@@ -628,10 +784,6 @@ body {
   color: var(--c-sage-500);
 }
 
-/* ==========================================================================
-   AUDIENCE SECTION (BACK COVER)
-   ========================================================================== */
-
 .section-audience {
   background: var(--c-cream-200);
 }
@@ -764,7 +916,7 @@ body {
 }
 
 /* ==========================================================================
-   BUNDLES & STORE SECTION
+   BUNDLES & STORE
    ========================================================================== */
 
 .bundles-lux-grid {
@@ -1137,7 +1289,7 @@ body {
 }
 
 /* ==========================================================================
-   REVIEWS & TESTIMONIES
+   REVIEWS & MASONRY
    ========================================================================== */
 
 .reviews-masonry {
@@ -1541,7 +1693,7 @@ body {
   color: var(--c-gold-400);
 }
 
-/* Footer */
+/* Footer & Logo */
 .lux-footer {
   background: var(--c-forest-900);
   color: var(--c-cream-300);
@@ -1555,9 +1707,16 @@ body {
   margin-bottom: 60px;
 }
 
-.footer-brand {
-  color: #fff;
+.footer-logo-wrap {
   margin-bottom: 20px;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 .footer-mission {
@@ -1613,16 +1772,16 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE (DESKTOP, TABLET & MOBILE VIEWPORTS)
+   RESPONSIVE (DESKTOP, TABLET & MOBILE)
    ========================================================================== */
 
 @media (max-width: 980px) {
-  .hero-layout, .author-split, .footer-content-grid {
+  .hero-layout, .author-split, .footer-content-grid, .free-ebook-card {
     grid-template-columns: 1fr;
   }
 
   .hero-layout {
-    gap: 48px;
+    gap: 40px;
     text-align: center;
   }
 
@@ -1662,12 +1821,12 @@ body {
   }
 
   .book-viewport {
-    max-width: 460px;
+    max-width: 480px;
   }
 
   .book-photo-card {
-    max-width: 400px;
-    transform: rotateX(4deg) rotateY(-4deg);
+    max-width: 420px;
+    transform: rotateX(4deg) rotateY(-4deg) scale(1);
   }
 
   .pillars-container, .bundles-lux-grid {
@@ -1699,7 +1858,15 @@ body {
   }
 
   .book-photo-card {
-    max-width: 310px;
+    max-width: 320px;
+  }
+
+  .free-ebook-card {
+    padding: 30px 20px;
+  }
+
+  .free-ebook-content h2 {
+    font-size: 2rem;
   }
 
   .hero-actions .btn {

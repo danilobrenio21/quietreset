@@ -132,7 +132,7 @@ function renderReviews() {
   `).join("");
 }
 
-// 3D Tilt Physics and Specular Light Reflection Engine
+// 3D Tilt Physics and Specular Light Reflection Engine (Calibrated for Extra Large Scale)
 function setup3DBookTilt() {
   const viewport = document.getElementById("bookViewport");
   const card = document.getElementById("book3d");
@@ -151,16 +151,16 @@ function setup3DBookTilt() {
     const rotateX = -((y - centerY) / centerY) * 14;
     const rotateY = ((x - centerX) / centerX) * 14;
 
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    card.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
 
     if (glare) {
       glare.style.opacity = "0.4";
-      glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%)`;
+      glare.style.background = `radial-gradient(circle at ${x}px${y}px, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%)`;
     }
   });
 
   viewport.addEventListener("mouseleave", () => {
-    card.style.transform = `perspective(1000px) rotateX(6deg) rotateY(-8deg) scale3d(1, 1, 1)`;
+    card.style.transform = `perspective(1400px) rotateX(6deg) rotateY(-8deg) scale(1.08)`;
     if (glare) {
       glare.style.opacity = "0";
     }
@@ -279,7 +279,7 @@ function updateCartDrawer() {
 
   const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
   countBadge.innerText = totalItems;
-  drawerCount.innerText = `${totalItems} ${totalItems === 1 ? 'item' : 'items'}`;
+  drawerCount.innerText = `${totalItems}${totalItems === 1 ? 'item' : 'items'}`;
 
   if (cart.length === 0) {
     listEl.innerHTML = `<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>`;
@@ -320,7 +320,6 @@ function updateCartDrawer() {
     discountRow.style.display = "none";
   }
 
-  // Shipping Progress (₱799 Threshold)
   const pct = Math.min(Math.round((subtotal / 799) * 100), 100);
   fillBar.style.width = `${pct}%`;
   pctLabel.innerText = `${pct}%`;
