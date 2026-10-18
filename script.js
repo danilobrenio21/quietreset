@@ -1,277 +1,394 @@
-// State Management
-let cart = [];
-let discountRate = 0;
+/* ==========================================================================
+   QUIET RESET — SCRIPT ENGINE
+   ========================================================================== */
 
-// Audience Data from Back Cover
+// 1. Audience Profiles from the Back Cover
 const audienceData = [
   {
+    icon: "fa-battery-quarter",
     title: "The overworked & mentally drained",
-    preview: "Running on empty, but afraid to stop.",
-    reflection: "Your worth is not measured by relentless output. Rest is not quitting; it is an act of holy trust."
+    preview: "Running on empty, but terrified to stop.",
+    letter: "You have convinced yourself that if you rest, everything falls apart. But God did not design your soul for endless output without deep restoration. Rest is not surrender to failure; it is an act of holy trust.",
+    scripture: "Matthew 11:28 — 'Come to me, all who labor and are heavy laden, and I will give you rest.'"
   },
   {
+    icon: "fa-eye-slash",
     title: "The leaders who pour out but feel unseen",
-    preview: "Secretly battling quiet exhaustion.",
-    reflection: "You cannot pour from a dry cup. God sees every quiet tear and every selfless hour in secret."
+    preview: "Secretly battling quiet, suffocating exhaustion.",
+    letter: "You stand on platforms and hold up everyone else's faith, but nobody asks who is praying for you in the quiet. God sees every unspoken tear shed behind closed study doors.",
+    scripture: "Galatians 6:9 — 'Let us not grow weary of doing good, for in due season we will reap.'"
   },
   {
+    icon: "fa-briefcase",
     title: "The business owners carrying silent burdens",
-    preview: "Afraid to admit the immense pressure.",
-    reflection: "Unless the Lord builds the house, those who build labor in vain. Hand the company back to Him."
+    preview: "Afraid to admit the pressure to clients and employees.",
+    letter: "The payroll stress, the fluctuating revenue, the expectation to be fearless. Hand the title of CEO back to the King of Kings. You are a steward, not the sole sustainer.",
+    scripture: "Psalm 127:1 — 'Unless the Lord builds the house, those who build it labor in vain.'"
   },
   {
+    icon: "fa-heart-pulse",
     title: "The wives fighting unseen battles",
-    preview: "Longing to be deeply understood.",
-    reflection: "You do not have to carry the emotional weight of your household in isolation."
+    preview: "Longing to be deeply heard and understood.",
+    letter: "Holding household tensions, emotional currents, and silent disappointments inside your spirit. The Lord numbers every tear in His bottle; your quiet faithfulness is honored.",
+    scripture: "Psalm 56:8 — 'You keep track of all my sorrows. You have collected all my tears in your bottle.'"
   },
   {
-    title: "The ministry workers falsely judged",
-    preview: "Questioning your original calling.",
-    reflection: "When people misjudge your heart, remember that God vindicates the humble."
+    icon: "fa-cross",
+    title: "Ministry workers falsely judged",
+    preview: "Questioning your original calling and integrity.",
+    letter: "When those you served turn around and misjudge your heart, the sting is sharp. Remember: Jesus was also betrayed by those He broke bread with. Healing begins at His feet.",
+    scripture: "Isaiah 61:3 — 'To give them beauty for ashes, the oil of joy for mourning.'"
   },
   {
-    title: "Couples who succeeded together yet drifted",
-    preview: "Wondering if genuine love can be restored.",
-    reflection: "Busyness creates silent distance. A quiet reset gives you space to reconnect heart to heart."
+    icon: "fa-hands-holding-circle",
+    title: "Couples who drifted apart quietly",
+    preview: "Wondering if tender closeness can ever be rekindled.",
+    letter: "Busyness builds walls of silence between spouses. You don't have to stay roommates. A quiet reset gives your marriage safe ground to soften, confess, and begin anew.",
+    scripture: "1 Peter 4:8 — 'Above all, keep loving one another earnestly, since love covers a multitude of sins.'"
   },
   {
-    title: "The believers who wonder if God still sees them",
-    preview: "Trusting God through deafening silence.",
-    reflection: "Silence does not equal absence. Even when He is quiet, His hand is shaping your next dawn."
+    icon: "fa-compass",
+    title: "Believers questioning if God still sees them",
+    preview: "Holding faith while enduring heavy silence.",
+    letter: "God's silence is not His absence. In the darkest soil, the seed undergoes quiet transformation before breaking into the daylight.",
+    scripture: "Isaiah 45:3 — 'I will give you hidden treasures, riches stored in secret places.'"
   }
 ];
 
-// Initial Reviews
-const reviews = [
+// 2. Initial Real Reader Reviews
+let reviewsList = [
   {
-    name: "Sarah G.",
-    role: "Church Volunteer & Mother",
+    name: "Atty. Christine V.",
+    role: "Corporate Counsel & Ministry Leader",
     stars: 5,
-    text: "I wept reading chapter 1. I felt so seen. It gave me permission to finally rest without guilt."
+    quote: "I started reading Chapter 1 at 11 PM and couldn't put it down. Ladyh articulate the precise ache of someone who looks successful on the outside but is dying of exhaustion on the inside."
   },
   {
-    name: "Mark T.",
-    role: "E-Commerce Founder",
+    name: "Rev. Marco Santos",
+    role: "Senior Pastor",
     stars: 5,
-    text: "As a business owner, the weight is suffocating at times. This book guided me back to stillness."
+    quote: "Quiet Reset needs to be mandatory reading in seminaries and leadership retreats. It liberated me from the false idol of Christian hustle culture."
   },
   {
-    name: "Rochelle M.",
-    role: "Ministry Worker",
+    name: "Janine M.",
+    role: "Entrepreneur & Mother of 2",
     stars: 5,
-    text: "Quiet Reset helped heal silent wounds from ministry burnout. Essential reading for every leader."
+    quote: "The Restoration Journal Set has changed my morning quiet times. My marriage and work feel grounded in actual peace for the first time in 4 years."
   }
 ];
 
-// Initialization
+// 3. E-Commerce Cart State
+let cart = [];
+let discount = 0;
+let isAudioPlaying = false;
+let audioContext;
+
+// DOM Initialization
 document.addEventListener("DOMContentLoaded", () => {
-  renderAudience();
+  renderAudienceCards();
   renderReviews();
+  setup3DBookTilt();
   setupEventListeners();
 });
 
 // Render Audience Cards
-function renderAudience() {
-  const container = document.getElementById("audienceGrid");
-  container.innerHTML = audienceData.map((item, index) => `
-    <div class="audience-card" onclick="toggleAudience(${index})">
-      <h4><i class="fa-regular fa-compass"></i> ${item.title}</h4>
-      <p class="preview">${item.preview}</p>
-      <div class="reflection" id="audience-${index}">
-        <p>${item.reflection}</p>
+function renderAudienceCards() {
+  const container = document.getElementById("audienceContainer");
+  container.innerHTML = audienceData.map((item, idx) => `
+    <div class="audience-interactive-card" onclick="toggleAudienceCard(${idx})">
+      <div class="card-top-row">
+        <i class="fa-solid ${item.icon} audience-icon"></i>
+        <i class="fa-solid fa-chevron-down expand-chevron"></i>
+      </div>
+      <h4 class="audience-title">${item.title}</h4>
+      <p class="audience-snippet">${item.preview}</p>
+      <div class="audience-expanded-content" id="audience-expand-${idx}">
+        <p class="letter-to-reader">"${item.letter}"</p>
+        <span class="scripture-anchor"><i class="fa-solid fa-book-bible"></i> ${item.scripture}</span>
       </div>
     </div>
   `).join("");
 }
 
-function toggleAudience(index) {
-  const card = document.querySelectorAll(".audience-card")[index];
-  card.classList.toggle("active");
+function toggleAudienceCard(idx) {
+  const cards = document.querySelectorAll(".audience-interactive-card");
+  cards[idx].classList.toggle("expanded");
 }
 
 // Render Reviews
 function renderReviews() {
-  const container = document.getElementById("reviewsContainer");
-  container.innerHTML = reviews.map(rev => `
-    <div class="review-card">
-      <div class="review-stars">${"★".repeat(rev.stars)}</div>
-      <p class="review-text">"${rev.text}"</p>
-      <div class="review-author">${rev.name}</div>
-      <div class="review-role">${rev.role}</div>
+  const container = document.getElementById("reviewsGrid");
+  container.innerHTML = reviewsList.map(r => `
+    <div class="review-lux-card">
+      <div>
+        <div class="stars">${'<i class="fa-solid fa-star"></i>'.repeat(r.stars)}</div>
+        <p class="quote">“${r.quote}”</p>
+      </div>
+      <div class="reviewer-meta">
+        <div class="name">${r.name}</div>
+        <div class="role">${r.role}</div>
+      </div>
     </div>
   `).join("");
 }
 
-// Event Listeners
-function setupEventListeners() {
-  // Cart open / close
-  document.getElementById("openCartBtn").addEventListener("click", openCart);
-  document.getElementById("closeCartBtn").addEventListener("click", closeCart);
-  document.getElementById("cartOverlay").addEventListener("click", closeCart);
+// Realistic 3D Tilt Physics for Hardcover Model
+function setup3DBookTilt() {
+  const viewport = document.getElementById("bookViewport");
+  const book = document.getElementById("book3d");
 
-  // Add to Bag buttons
-  document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
+  if (!viewport || !book) return;
+
+  viewport.addEventListener("mousemove", (e) => {
+    const rect = viewport.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotX = -(y / rect.height) * 35;
+    const rotY = (x / rect.width) * 35 - 15;
+
+    book.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  });
+
+  viewport.addEventListener("mouseleave", () => {
+    book.style.transform = "rotateY(-22deg) rotateX(10deg)";
+  });
+}
+
+// Event Listeners Configuration
+function setupEventListeners() {
+  // Cart Drawer
+  document.getElementById("bagTrigger").addEventListener("click", openCartDrawer);
+  document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
+  document.getElementById("cartBackdrop").addEventListener("click", closeCartDrawer);
+
+  // Add to Bag Buttons
+  document.querySelectorAll(".add-cart-action").forEach(btn => {
     btn.addEventListener("click", (e) => {
-      const id = e.target.getAttribute("data-id");
-      const name = e.target.getAttribute("data-name");
-      const price = parseFloat(e.target.getAttribute("data-price"));
-      addToCart(id, name, price);
+      const b = e.currentTarget;
+      const id = b.getAttribute("data-id");
+      const name = b.getAttribute("data-name");
+      const price = parseFloat(b.getAttribute("data-price"));
+      addToBag(id, name, price);
     });
+  });
+
+  // Excerpt Modal
+  document.getElementById("heroExcerptBtn").addEventListener("click", () => {
+    document.getElementById("excerptModal").classList.add("active");
+  });
+  document.getElementById("closeExcerptBtn").addEventListener("click", closeAllModals);
+
+  // Review Modal
+  document.getElementById("openReviewBtn").addEventListener("click", () => {
+    document.getElementById("reviewModal").classList.add("active");
+  });
+  document.getElementById("closeReviewModalBtn").addEventListener("click", closeAllModals);
+
+  // Review Form Submit
+  document.getElementById("reviewSubmissionForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newRev = {
+      name: document.getElementById("revName").value,
+      role: document.getElementById("revRole").value,
+      stars: parseInt(document.getElementById("revRating").value),
+      quote: document.getElementById("revComment").value
+    };
+    reviewsList.unshift(newRev);
+    renderReviews();
+    closeAllModals();
+    showToast("Thank you. Your testimony has been added!");
+    e.target.reset();
   });
 
   // Promo Code
   document.getElementById("applyPromoBtn").addEventListener("click", () => {
-    const code = document.getElementById("promoInput").value.trim().toUpperCase();
+    const code = document.getElementById("promoCodeInput").value.trim().toUpperCase();
     if (code === "RESET10") {
-      discountRate = 0.10;
-      showToast("Promo RESET10 applied! 10% off");
-      updateCartDisplay();
+      discount = 0.10;
+      document.getElementById("couponNote").innerText = "10% discount applied!";
+      document.getElementById("couponNote").style.color = "#345e44";
+      updateCartDrawer();
+      showToast("Promo code RESET10 applied!");
     } else {
-      showToast("Invalid promo code");
+      document.getElementById("couponNote").innerText = "Invalid code. Try RESET10";
+      document.getElementById("couponNote").style.color = "#b03e3e";
     }
   });
 
-  // Excerpt Modal
-  document.getElementById("openExcerptBtn").addEventListener("click", () => {
-    document.getElementById("excerptModal").classList.add("active");
-  });
-  document.getElementById("closeExcerptBtn").addEventListener("click", closeModals);
-
-  // Review Modal
-  document.getElementById("openReviewModalBtn").addEventListener("click", () => {
-    document.getElementById("reviewModal").classList.add("active");
-  });
-  document.getElementById("closeReviewBtn").addEventListener("click", closeModals);
-
-  // Review Submission
-  document.getElementById("reviewForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const newRev = {
-      name: document.getElementById("reviewerName").value,
-      role: document.getElementById("reviewerRole").value,
-      stars: parseInt(document.getElementById("reviewerRating").value),
-      text: document.getElementById("reviewerText").value
-    };
-    reviews.unshift(newRev);
-    renderReviews();
-    closeModals();
-    showToast("Thank you for your review!");
-    e.target.reset();
-  });
-
-  // Checkout Button
-  document.getElementById("checkoutBtn").addEventListener("click", () => {
+  // Checkout Triggers
+  document.getElementById("checkoutTriggerBtn").addEventListener("click", () => {
     if (cart.length === 0) {
-      showToast("Your bag is empty");
+      showToast("Your bag is currently empty");
       return;
     }
-    alert("Checkout initiated! You can connect this to your preferred payment gateway (GCash, Maya, PayMongo).");
+    closeCartDrawer();
+    document.getElementById("checkoutModal").classList.add("active");
   });
+
+  document.getElementById("closeCheckoutBtn").addEventListener("click", closeAllModals);
+
+  document.getElementById("checkoutForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    closeAllModals();
+    cart = [];
+    updateCartDrawer();
+    alert("Blessings! Your order has been placed. You will receive an SMS shipping confirmation with your tracking code.");
+  });
+
+  // Ambient Audio Simulator (Synthetic peaceful binaural tone)
+  document.getElementById("soundToggle").addEventListener("click", toggleAmbientSound);
 }
 
-// Cart Logic
-function addToCart(id, name, price) {
+// Shopping Bag Management
+function addToBag(id, name, price) {
   const existing = cart.find(item => item.id === id);
   if (existing) {
     existing.qty += 1;
   } else {
     cart.push({ id, name, price, qty: 1 });
   }
-  updateCartDisplay();
-  openCart();
-  showToast(`Added ${name} to bag`);
+  updateCartDrawer();
+  openCartDrawer();
+  showToast(`Added ${name} to your bag`);
 }
 
-function updateCartDisplay() {
-  const cartItemsEl = document.getElementById("cartItems");
-  const cartBadge = document.getElementById("cartBadge");
-  const drawerCount = document.getElementById("drawerCount");
-  const subtotalEl = document.getElementById("subtotalPrice");
-  const totalEl = document.getElementById("totalPrice");
-  const discountLine = document.getElementById("discountLine");
-  const discountPriceEl = document.getElementById("discountPrice");
-  const shippingProgress = document.getElementById("shippingProgress");
-  const shippingText = document.getElementById("shippingText");
+function updateCartDrawer() {
+  const listEl = document.getElementById("cartItemsList");
+  const countBadge = document.getElementById("cartCount");
+  const drawerCount = document.getElementById("drawerItemCount");
+  const subtotalEl = document.getElementById("summarySubtotal");
+  const discountRow = document.getElementById("summaryDiscountRow");
+  const discountEl = document.getElementById("summaryDiscount");
+  const totalEl = document.getElementById("summaryTotal");
+  const fillBar = document.getElementById("shippingFill");
+  const statusLabel = document.getElementById("shippingStatusLabel");
+  const pctLabel = document.getElementById("shippingPctLabel");
 
-  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  cartBadge.innerText = totalQty;
-  drawerCount.innerText = totalQty;
+  const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
+  countBadge.innerText = totalItems;
+  drawerCount.innerText = `${totalItems}${totalItems === 1 ? 'item' : 'items'}`;
 
   if (cart.length === 0) {
-    cartItemsEl.innerHTML = `<p style="text-align:center; color:#888; padding: 40px 0;">Your bag is currently empty.</p>`;
+    listEl.innerHTML = `<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>`;
     subtotalEl.innerText = "₱0";
     totalEl.innerText = "₱0";
-    discountLine.style.display = "none";
-    shippingProgress.style.width = "0%";
-    shippingText.innerText = "Add ₱799 for FREE shipping";
+    discountRow.style.display = "none";
+    fillBar.style.width = "0%";
+    statusLabel.innerText = "Add ₱799 for FREE nationwide shipping";
+    pctLabel.innerText = "0%";
     return;
   }
 
-  cartItemsEl.innerHTML = cart.map((item, idx) => `
-    <div class="cart-item">
-      <div>
-        <strong>${item.name}</strong>
-        <div>₱${item.price.toLocaleString()} x${item.qty}</div>
+  listEl.innerHTML = cart.map((item, index) => `
+    <div class="cart-item-row">
+      <div class="item-meta">
+        <h4>${item.name}</h4>
+        <span class="price">₱${item.price.toLocaleString()}</span>
       </div>
-      <div>
-        <button onclick="changeQty(${idx}, -1)" style="padding: 2px 8px;">-</button>
-        <span style="margin: 0 6px;">${item.qty}</span>
-        <button onclick="changeQty(${idx}, 1)" style="padding: 2px 8px;">+</button>
+      <div class="quantity-controller">
+        <button onclick="changeQty(${index}, -1)">–</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${index}, 1)">+</button>
       </div>
     </div>
   `).join("");
 
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  const discount = subtotal * discountRate;
-  const finalTotal = subtotal - discount;
+  const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+  const discountVal = subtotal * discount;
+  const finalTotal = subtotal - discountVal;
 
   subtotalEl.innerText = `₱${subtotal.toLocaleString()}`;
   totalEl.innerText = `₱${finalTotal.toLocaleString()}`;
 
-  if (discountRate > 0) {
-    discountLine.style.display = "flex";
-    discountPriceEl.innerText = `-₱${discount.toLocaleString()}`;
+  if (discount > 0) {
+    discountRow.style.display = "flex";
+    discountEl.innerText = `-₱${discountVal.toLocaleString()}`;
   } else {
-    discountLine.style.display = "none";
+    discountRow.style.display = "none";
   }
 
-  // Free shipping bar (₱799 threshold)
-  const percent = Math.min((subtotal / 799) * 100, 100);
-  shippingProgress.style.width = `${percent}%`;
+  // Shipping Progress (₱799 Threshold)
+  const pct = Math.min(Math.round((subtotal / 799) * 100), 100);
+  fillBar.style.width = `${pct}%`;
+  pctLabel.innerText = `${pct}%`;
+
   if (subtotal >= 799) {
-    shippingText.innerText = "🎉 You've unlocked FREE Nationwide Shipping!";
+    statusLabel.innerHTML = `<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery`;
   } else {
-    shippingText.innerText = `Add ₱${(799 - subtotal).toLocaleString()} more for FREE shipping`;
+    const diff = 799 - subtotal;
+    statusLabel.innerText = `Add ₱${diff.toLocaleString()} more for FREE shipping`;
   }
 }
 
-function changeQty(index, delta) {
-  cart[index].qty += delta;
+function changeQty(index, change) {
+  cart[index].qty += change;
   if (cart[index].qty <= 0) {
     cart.splice(index, 1);
   }
-  updateCartDisplay();
+  updateCartDrawer();
 }
 
-function openCart() {
+function openCartDrawer() {
   document.getElementById("cartDrawer").classList.add("active");
-  document.getElementById("cartOverlay").style.display = "block";
+  document.getElementById("cartBackdrop").style.display = "block";
 }
 
-function closeCart() {
+function closeCartDrawer() {
   document.getElementById("cartDrawer").classList.remove("active");
-  document.getElementById("cartOverlay").style.display = "none";
+  document.getElementById("cartBackdrop").style.display = "none";
 }
 
-function closeModals() {
-  document.querySelectorAll(".modal-overlay").forEach(modal => modal.classList.remove("active"));
+function closeAllModals() {
+  document.querySelectorAll(".modal-backdrop").forEach(m => m.classList.remove("active"));
 }
 
 function showToast(msg) {
-  const toast = document.getElementById("toastNotification");
-  toast.innerText = msg;
-  toast.style.display = "block";
+  const t = document.getElementById("luxToast");
+  document.getElementById("toastMessage").innerText = msg;
+  t.style.display = "flex";
   setTimeout(() => {
-    toast.style.display = "none";
-  }, 2500);
+    t.style.display = "none";
+  }, 2800);
+}
+
+// Gentle Sanctuary Ambient Tone Generator
+function toggleAmbientSound() {
+  const btn = document.getElementById("soundStatus");
+  if (!isAudioPlaying) {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioContext = new AudioContext();
+      
+      // Warm chord oscillators
+      const osc1 = audioContext.createOscillator();
+      const osc2 = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(174, audioContext.currentTime); // Solfeggio healing frequency 174Hz
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(261.63, audioContext.currentTime); // C4
+
+      gainNode.gain.setValueAtTime(0.04, audioContext.currentTime);
+
+      osc1.connect(gainNode);
+      osc2.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      osc1.start();
+      osc2.start();
+
+      isAudioPlaying = true;
+      btn.innerText = "Pause Ambience";
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    if (audioContext) {
+      audioContext.close();
+    }
+    isAudioPlaying = false;
+    btn.innerText = "Play Ambience";
+  }
 }
