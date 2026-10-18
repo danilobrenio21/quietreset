@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — BESPOKE LUXURY BOTANICAL DESIGN SYSTEM & APPLE-STYLE SCROLL
+   QUIET RESET — DESIGN SYSTEM WITH BULLETPROOF VISIBILITY
    ========================================================================== */
 
 :root {
@@ -61,10 +61,9 @@ body {
 }
 
 /* ==========================================================================
-   APPLE-STYLE SCROLL REVEAL & INTERACTION ENGINE
+   SAFE SCROLL ANIMATION (NEVER HIDES CONTENT BY ACCIDENT)
    ========================================================================== */
 
-/* Top Thin Gold Scroll Progress Line */
 .scroll-progress-line {
   position: fixed;
   top: 0;
@@ -76,21 +75,23 @@ body {
   transition: width 0.1s ease-out;
 }
 
-/* Apple-like fluid entry state */
+/* Content stays visible by default */
 .anim-reveal {
-  opacity: 0;
-  transform: translateY(34px) scale(0.98);
-  filter: blur(4px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.anim-reveal.is-visible {
+/* Once JS mounts, smoothly stage in remaining sections */
+.js-loaded .anim-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.js-loaded .anim-reveal.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: translateY(0);
 }
 
 /* Ambient Audio Bar */
@@ -144,14 +145,14 @@ body {
   color: var(--c-gold-400);
 }
 
-/* Container */
+/* Layout Utilities */
 .container {
   width: 92%;
   max-width: 1240px;
   margin: 0 auto;
 }
 
-/* Navbar & Logo */
+/* Navbar */
 .navbar-wrapper {
   position: sticky;
   top: 0;
@@ -437,7 +438,7 @@ body {
   color: var(--c-sage-500);
 }
 
-/* Extra Large Hand-Sized 3D Book */
+/* Extra Large Hand-Sized 3D Book Showcase */
 .hero-book-showcase {
   display: flex;
   flex-direction: column;
@@ -497,7 +498,7 @@ body {
 }
 
 /* ==========================================================================
-   NEW EDITORIAL CRAFTSMANSHIP SHOWCASE (quietreset1.jpg)
+   EDITORIAL CRAFTSMANSHIP SHOWCASE (quietreset1.jpg)
    ========================================================================== */
 
 .section-craftsmanship {
@@ -1692,7 +1693,7 @@ body {
   margin-top: 12px;
 }
 
-/* Reader Modal Dimensions */
+/* Modals */
 .modal-backdrop.active {
   display: flex;
   align-items: center;

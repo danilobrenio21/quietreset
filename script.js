@@ -55,8 +55,8 @@ const audienceData = [
   }
 ];
 
-// 2. Real Reader Reviews
-let reviewsList = [
+// 2. Reader Reviews
+const reviewsList = [
   {
     name: "Atty. Christine V.",
     role: "Corporate Counsel & Ministry Leader",
@@ -77,71 +77,73 @@ let reviewsList = [
   }
 ];
 
-// 3. E-Commerce Cart State
+// 3. Cart State
 let cart = [];
 let discount = 0;
 let isAudioPlaying = false;
-let audioContext;
+let audioContext = null;
 
-// Initialization
+// Initialize
 document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("js-loaded");
   renderAudienceCards();
   renderReviews();
   setup3DBookTilt();
   setupEventListeners();
-  setupAppleScrollEffects();
+  setupScrollEffects();
 });
 
-// Apple-Style Scroll Reveal & Progress Tracker
-function setupAppleScrollEffects() {
+// Scroll Progress & Reveal
+function setupScrollEffects() {
   const progressBar = document.getElementById("scrollProgressLine");
 
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (progressBar) {
-      progressBar.style.width = `${scrollPercent}%`;
+    if (progressBar && docHeight > 0) {
+      progressBar.style.width = ((scrollTop / docHeight) * 100) + "%";
     }
   }, { passive: true });
 
-  const revealElements = document.querySelectorAll(".anim-reveal");
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.getAttribute("data-delay") || 0;
-        setTimeout(() => {
-          entry.target.classList.add("is-visible");
-        }, delay);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.12,
-    rootMargin: "0px 0px -50px 0px"
-  });
+  const elements = document.querySelectorAll(".anim-reveal");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute("data-delay") || "0", 10);
+          setTimeout(() => {
+            entry.target.classList.add("is-visible");
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
 
-  revealElements.forEach(el => revealObserver.observe(el));
+    elements.forEach((el) => observer.observe(el));
+  } else {
+    elements.forEach((el) => el.classList.add("is-visible"));
+  }
 }
 
-// Render Audience Cards
+// Render Audience
 function renderAudienceCards() {
   const container = document.getElementById("audienceContainer");
   if (!container) return;
-  container.innerHTML = audienceData.map((item, idx) => `
-    <div class="audience-interactive-card anim-reveal" data-delay="${(idx \% 3) * 100}" onclick="toggleAudienceCard(${idx})">
-      <div class="card-top-row">
-        <i class="fa-solid ${item.icon} audience-icon"></i>
-        <i class="fa-solid fa-chevron-down expand-chevron"></i>
-      </div>
-      <h4 class="audience-title">${item.title}</h4>
-      <p class="audience-snippet">${item.preview}</p>
-      <div class="audience-expanded-content" id="audience-expand-${idx}">
-        <p class="letter-to-reader">"${item.letter}"</p>
-        <span class="scripture-anchor"><i class="fa-solid fa-book-bible"></i> ${item.scripture}</span>
-      </div>
-    </div>
-  `).join("");
+
+  container.innerHTML = audienceData.map((item, idx) => {
+    return '<div class="audience-interactive-card anim-reveal" onclick="toggleAudienceCard(' + idx + ')">' +
+      '<div class="card-top-row">' +
+        '<i class="fa-solid ' + item.icon + ' audience-icon"></i>' +
+        '<i class="fa-solid fa-chevron-down expand-chevron"></i>' +
+      '</div>' +
+      '<h4 class="audience-title">' + item.title + '</h4>' +
+      '<p class="audience-snippet">' + item.preview + '</p>' +
+      '<div class="audience-expanded-content" id="audience-expand-' + idx + '">' +
+        '<p class="letter-to-reader">"' + item.letter + '"</p>' +
+        '<span class="scripture-anchor"><i class="fa-solid fa-book-bible"></i> ' + item.scripture + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join("");
 }
 
 function toggleAudienceCard(idx) {
@@ -155,21 +157,26 @@ function toggleAudienceCard(idx) {
 function renderReviews() {
   const container = document.getElementById("reviewsGrid");
   if (!container) return;
-  container.innerHTML = reviewsList.map((r, i) => `
-    <div class="review-lux-card anim-reveal" data-delay="${(i % 3) * 100}">
-      <div>
-        <div class="stars">${'<i class="fa-solid fa-star"></i>'.repeat(r.stars)}</div>
-        <p class="quote">“${r.quote}”</p>
-      </div>
-      <div class="reviewer-meta">
-        <div class="name">${r.name}</div>
-        <div class="role">${r.role}</div>
-      </div>
-    </div>
-  `).join("");
+
+  container.innerHTML = reviewsList.map((r) => {
+    let starHtml = "";
+    for (let i = 0; i < r.stars; i++) {
+      starHtml += '<i class="fa-solid fa-star"></i>';
+    }
+    return '<div class="review-lux-card anim-reveal">' +
+      '<div>' +
+        '<div class="stars">' + starHtml + '</div>' +
+        '<p class="quote">“' + r.quote + '”</p>' +
+      '</div>' +
+      '<div class="reviewer-meta">' +
+        '<div class="name">' + r.name + '</div>' +
+        '<div class="role">' + r.role + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join("");
 }
 
-// 3D Tilt Physics and Specular Light Reflection Engine
+// 3D Book Tilt Physics
 function setup3DBookTilt() {
   const viewport = document.getElementById("bookViewport");
   const card = document.getElementById("book3d");
@@ -181,26 +188,23 @@ function setup3DBookTilt() {
     const rect = viewport.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = -((y - centerY) / centerY) * 14;
-    const rotateY = ((x - centerX) / centerX) * 14;
+    const rotX = -((y - centerY) / centerY) * 14;
+    const rotY = ((x - centerX) / centerX) * 14;
 
-    card.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
+    card.style.transform = "perspective(1400px) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale(1.1)";
 
     if (glare) {
       glare.style.opacity = "0.4";
-      glare.style.background = `radial-gradient(circle at ${x}px${y}px, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 65%)`;
+      glare.style.background = "radial-gradient(circle at " + x + "px " + y + "px, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 65%)";
     }
   });
 
   viewport.addEventListener("mouseleave", () => {
-    card.style.transform = `perspective(1400px) rotateX(6deg) rotateY(-8deg) scale(1.08)`;
-    if (glare) {
-      glare.style.opacity = "0";
-    }
+    card.style.transform = "perspective(1400px) rotateX(6deg) rotateY(-8deg) scale(1.08)";
+    if (glare) glare.style.opacity = "0";
   });
 }
 
@@ -224,12 +228,12 @@ function setupEventListeners() {
   if (closeCartBtn) closeCartBtn.addEventListener("click", closeCartDrawer);
   if (cartBackdrop) cartBackdrop.addEventListener("click", closeCartDrawer);
 
-  document.querySelectorAll(".add-cart-action").forEach(btn => {
+  document.querySelectorAll(".add-cart-action").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const b = e.currentTarget;
       const id = b.getAttribute("data-id");
       const name = b.getAttribute("data-name");
-      const price = parseFloat(b.getAttribute("data-price"));
+      const price = parseFloat(b.getAttribute("data-price") || "0");
       addToBag(id, name, price);
     });
   });
@@ -253,13 +257,18 @@ function setupEventListeners() {
   if (reviewForm) {
     reviewForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const newRev = {
-        name: document.getElementById("revName").value,
-        role: document.getElementById("revRole").value,
-        stars: parseInt(document.getElementById("revRating").value),
-        quote: document.getElementById("revComment").value
-      };
-      reviewsList.unshift(newRev);
+      const nameInput = document.getElementById("revName");
+      const roleInput = document.getElementById("revRole");
+      const rateInput = document.getElementById("revRating");
+      const textInput = document.getElementById("revComment");
+
+      reviewsList.unshift({
+        name: nameInput ? nameInput.value : "Anonymous",
+        role: roleInput ? roleInput.value : "Reader",
+        stars: parseInt(rateInput ? rateInput.value : "5", 10),
+        quote: textInput ? textInput.value : ""
+      });
+
       renderReviews();
       closeAllModals();
       showToast("Thank you. Your testimony has been added!");
@@ -272,6 +281,7 @@ function setupEventListeners() {
       const input = document.getElementById("promoCodeInput");
       const code = input ? input.value.trim().toUpperCase() : "";
       const note = document.getElementById("couponNote");
+
       if (code === "RESET10") {
         discount = 0.10;
         if (note) {
@@ -316,17 +326,17 @@ function setupEventListeners() {
   if (soundToggle) soundToggle.addEventListener("click", toggleAmbientSound);
 }
 
-// Shopping Bag Mechanics
+// Shopping Bag
 function addToBag(id, name, price) {
-  const existing = cart.find(item => item.id === id);
+  const existing = cart.find((item) => item.id === id);
   if (existing) {
     existing.qty += 1;
   } else {
-    cart.push({ id, name, price, qty: 1 });
+    cart.push({ id: id, name: name, price: price, qty: 1 });
   }
   updateCartDrawer();
   openCartDrawer();
-  showToast(`Added ${name} to your bag`);
+  showToast("Added " + name + " to your bag");
 }
 
 function updateCartDrawer() {
@@ -345,10 +355,10 @@ function updateCartDrawer() {
 
   const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
   if (countBadge) countBadge.innerText = totalItems;
-  if (drawerCount) drawerCount.innerText = `${totalItems}${totalItems === 1 ? 'item' : 'items'}`;
+  if (drawerCount) drawerCount.innerText = totalItems + (totalItems === 1 ? " item" : " items");
 
   if (cart.length === 0) {
-    listEl.innerHTML = `<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>`;
+    listEl.innerHTML = '<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>';
     if (subtotalEl) subtotalEl.innerText = "₱0";
     if (totalEl) totalEl.innerText = "₱0";
     if (discountRow) discountRow.style.display = "none";
@@ -358,44 +368,44 @@ function updateCartDrawer() {
     return;
   }
 
-  listEl.innerHTML = cart.map((item, index) => `
-    <div class="cart-item-row">
-      <div class="item-meta">
-        <h4>${item.name}</h4>
-        <span class="price">₱${item.price.toLocaleString()}</span>
-      </div>
-      <div class="quantity-controller">
-        <button onclick="changeQty(${index}, -1)">–</button>
-        <span>${item.qty}</span>
-        <button onclick="changeQty(${index}, 1)">+</button>
-      </div>
-    </div>
-  `).join("");
+  listEl.innerHTML = cart.map((item, index) => {
+    return '<div class="cart-item-row">' +
+      '<div class="item-meta">' +
+        '<h4>' + item.name + '</h4>' +
+        '<span class="price">₱' + item.price.toLocaleString() + '</span>' +
+      '</div>' +
+      '<div class="quantity-controller">' +
+        '<button onclick="changeQty(' + index + ', -1)">–</button>' +
+        '<span>' + item.qty + '</span>' +
+        '<button onclick="changeQty(' + index + ', 1)">+</button>' +
+      '</div>' +
+    '</div>';
+  }).join("");
 
   const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
   const discountVal = subtotal * discount;
   const finalTotal = subtotal - discountVal;
 
-  if (subtotalEl) subtotalEl.innerText = `₱${subtotal.toLocaleString()}`;
-  if (totalEl) totalEl.innerText = `₱${finalTotal.toLocaleString()}`;
+  if (subtotalEl) subtotalEl.innerText = "₱" + subtotal.toLocaleString();
+  if (totalEl) totalEl.innerText = "₱" + finalTotal.toLocaleString();
 
   if (discount > 0) {
     if (discountRow) discountRow.style.display = "flex";
-    if (discountEl) discountEl.innerText = `-₱${discountVal.toLocaleString()}`;
+    if (discountEl) discountEl.innerText = "-₱" + discountVal.toLocaleString();
   } else {
     if (discountRow) discountRow.style.display = "none";
   }
 
   const pct = Math.min(Math.round((subtotal / 799) * 100), 100);
-  if (fillBar) fillBar.style.width = `${pct}%`;
-  if (pctLabel) pctLabel.innerText = `${pct}%`;
+  if (fillBar) fillBar.style.width = pct + "%";
+  if (pctLabel) pctLabel.innerText = pct + "%";
 
   if (statusLabel) {
     if (subtotal >= 799) {
-      statusLabel.innerHTML = `<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery`;
+      statusLabel.innerHTML = "<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery";
     } else {
       const diff = 799 - subtotal;
-      statusLabel.innerText = `Add ₱${diff.toLocaleString()} more for FREE shipping`;
+      statusLabel.innerText = "Add ₱" + (799 - subtotal).toLocaleString() + " more for FREE shipping";
     }
   }
 }
@@ -423,7 +433,7 @@ function closeCartDrawer() {
 }
 
 function closeAllModals() {
-  document.querySelectorAll(".modal-backdrop").forEach(m => m.classList.remove("active"));
+  document.querySelectorAll(".modal-backdrop").forEach((m) => m.classList.remove("active"));
 }
 
 function showToast(msg) {
@@ -437,21 +447,21 @@ function showToast(msg) {
   }, 2800);
 }
 
-// Sanctuary Ambient Audio
+// Ambient Audio
 function toggleAmbientSound() {
   const btn = document.getElementById("soundStatus");
   if (!isAudioPlaying) {
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       audioContext = new AudioCtx();
-      
+
       const osc1 = audioContext.createOscillator();
       const osc2 = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
-      osc1.type = 'sine';
+      osc1.type = "sine";
       osc1.frequency.setValueAtTime(174, audioContext.currentTime);
-      osc2.type = 'triangle';
+      osc2.type = "triangle";
       osc2.frequency.setValueAtTime(261.63, audioContext.currentTime);
 
       gainNode.gain.setValueAtTime(0.04, audioContext.currentTime);
