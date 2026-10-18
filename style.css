@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QUIET RESET — BESPOKE LUXURY BOTANICAL DESIGN SYSTEM
+   QUIET RESET — BESPOKE LUXURY BOTANICAL DESIGN SYSTEM & APPLE-STYLE SCROLL
    ========================================================================== */
 
 :root {
@@ -33,11 +33,11 @@
   --shadow-hover:  0 20px 45px rgba(18, 36, 25, 0.12);
 
   --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
   --radius-pill: 9999px;
   
-  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -58,6 +58,39 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   APPLE-STYLE SCROLL REVEAL & INTERACTION ENGINE
+   ========================================================================== */
+
+/* Top Thin Gold Scroll Progress Line */
+.scroll-progress-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--c-sage-500), var(--c-gold-500));
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
+/* Apple-like fluid entry state */
+.anim-reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(0.98);
+  filter: blur(4px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.anim-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 /* Ambient Audio Bar */
@@ -157,7 +190,7 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 22px;
 }
 
 .nav-item {
@@ -234,7 +267,7 @@ body {
 }
 
 /* ==========================================================================
-   HERO STAGE WITH ENLARGED (HAND-PROPORTIONED) 3D BOOK
+   HERO STAGE & LARGE 3D BOOK
    ========================================================================== */
 
 .hero-stage {
@@ -404,10 +437,7 @@ body {
   color: var(--c-sage-500);
 }
 
-/* ==========================================================================
-   EXTRA LARGE 3D BOOK SHOWCASE ENGINE (MATCHES HAND PROPORTIONS)
-   ========================================================================== */
-
+/* Extra Large Hand-Sized 3D Book */
 .hero-book-showcase {
   display: flex;
   flex-direction: column;
@@ -464,6 +494,107 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* ==========================================================================
+   NEW EDITORIAL CRAFTSMANSHIP SHOWCASE (quietreset1.jpg)
+   ========================================================================== */
+
+.section-craftsmanship {
+  padding: 100px 0;
+  background: var(--c-cream-200);
+}
+
+.craft-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.craft-image-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(18, 36, 25, 0.14);
+  border: 1px solid var(--c-border);
+}
+
+.editorial-zoom-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.craft-image-frame:hover .editorial-zoom-img {
+  transform: scale(1.04);
+}
+
+.craft-glass-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(253, 252, 247, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--c-forest-900);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.craft-glass-badge i {
+  color: var(--c-gold-500);
+}
+
+.craft-lead {
+  font-size: 1.15rem;
+  color: var(--c-forest-800);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.craft-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.craft-feature-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.cf-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--c-border);
+  color: var(--c-sage-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.craft-feature-item h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--c-forest-900);
+  margin-bottom: 4px;
+}
+
+.craft-feature-item p {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
 }
 
 /* ==========================================================================
@@ -708,7 +839,7 @@ body {
 }
 
 .pillar-lux-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-card);
   border-color: var(--c-sage-500);
 }
@@ -1146,7 +1277,7 @@ body {
 }
 
 /* ==========================================================================
-   AUTHOR SPOTLIGHT
+   AUTHOR SPOTLIGHT WITH quietreset2.jpg
    ========================================================================== */
 
 .author-split {
@@ -1160,22 +1291,25 @@ body {
   position: relative;
 }
 
-.author-image-aesthetic {
-  height: 440px;
-  background: linear-gradient(145deg, #1f3a2b, #122419);
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.author-photo-card {
   position: relative;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  border: 1px solid var(--c-border);
+  background: #122419;
 }
 
-.botanical-silhouette {
-  font-size: 6rem;
-  color: rgba(255, 255, 255, 0.08);
+.author-img-actual {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.author-photo-card:hover .author-img-actual {
+  transform: scale(1.03);
 }
 
 .author-overlay-badge {
@@ -1289,7 +1423,7 @@ body {
 }
 
 /* ==========================================================================
-   REVIEWS & MASONRY
+   REVIEWS & TESTIMONIES
    ========================================================================== */
 
 .reviews-masonry {
@@ -1308,6 +1442,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: var(--transition);
+}
+
+.review-lux-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
 }
 
 .review-lux-card .stars {
@@ -1552,7 +1692,7 @@ body {
   margin-top: 12px;
 }
 
-/* Modals */
+/* Reader Modal Dimensions */
 .modal-backdrop.active {
   display: flex;
   align-items: center;
@@ -1776,7 +1916,7 @@ body {
    ========================================================================== */
 
 @media (max-width: 980px) {
-  .hero-layout, .author-split, .footer-content-grid, .free-ebook-card {
+  .hero-layout, .author-split, .footer-content-grid, .free-ebook-card, .craft-grid {
     grid-template-columns: 1fr;
   }
 

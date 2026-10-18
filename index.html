@@ -17,6 +17,9 @@
 </head>
 <body>
 
+  <!-- Apple-Style Global Scroll Progress Bar -->
+  <div class="scroll-progress-line" id="scrollProgressLine"></div>
+
   <!-- Ambient Sound Sanctuary Player -->
   <div class="ambient-bar" id="ambientBar">
     <div class="container ambient-container">
@@ -41,12 +44,12 @@
 
       <nav class="nav-links" id="navLinks">
         <a href="#about" class="nav-item">The Book</a>
+        <a href="#craftsmanship" class="nav-item">The Edition</a>
         <a href="#pillars" class="nav-item">3 Pillars</a>
         <a href="#audience" class="nav-item">Who It's For</a>
         <a href="#free-ebook" class="nav-item free-ebook-nav"><i class="fa-solid fa-gift"></i> Free Ebook</a>
         <a href="#prayer" class="nav-item"><i class="fa-solid fa-hands-praying"></i> Prayer</a>
         <a href="#author" class="nav-item">The Author</a>
-        <a href="#reviews" class="nav-item">Testimonies</a>
         <a href="#shop" class="nav-item buy-highlight">Get The Book</a>
       </nav>
 
@@ -69,7 +72,7 @@
       <div class="container hero-layout">
         
         <!-- Left: Copy & CTAs -->
-        <div class="hero-copy">
+        <div class="hero-copy anim-reveal" data-delay="100">
           <div class="curated-pill">
             <span class="gold-dot"></span>
             <span>Bestselling Purpose-Driven Book Nationwide</span>
@@ -108,7 +111,7 @@
         </div>
 
         <!-- Right: Large Hand-Sized 3D Book Showcase -->
-        <div class="hero-book-showcase">
+        <div class="hero-book-showcase anim-reveal" data-delay="250">
           <div class="book-viewport" id="bookViewport">
             <div class="book-photo-card" id="book3d">
               <img src="images/IMG_0320%20-%20Edited.png" alt="Quiet Reset: Rest, Reset, Rebuild by Ladyh Joy O." class="book-mockup-img" id="bookImage">
@@ -121,10 +124,56 @@
       </div>
     </section>
 
+    <!-- NEW APPLE-STYLE EDITORIAL SHOWCASE (Featuring quietreset1.jpg) -->
+    <section class="section-craftsmanship" id="craftsmanship">
+      <div class="container">
+        <div class="craft-grid">
+          <div class="craft-image-frame anim-reveal" data-delay="100">
+            <img src="images/quietreset1.jpg" alt="Quiet Reset Physical Presentation" class="editorial-zoom-img">
+            <div class="craft-glass-badge">
+              <i class="fa-solid fa-feather-pointed"></i>
+              <span>Every page crafted with prayer & intention</span>
+            </div>
+          </div>
+
+          <div class="craft-content anim-reveal" data-delay="250">
+            <span class="section-badge-left">Physical Edition</span>
+            <h2 class="section-main-heading text-left">An Invitation to Stillness</h2>
+            <p class="craft-lead">
+              More than ink and paper. A tactile sanctuary designed to help you step away from the digital noise and sit in God's presence.
+            </p>
+            <div class="craft-features-list">
+              <div class="craft-feature-item">
+                <div class="cf-icon"><i class="fa-solid fa-book"></i></div>
+                <div>
+                  <h4>Velvet Soft-Touch Finish</h4>
+                  <p>A gentle tactile cover that invites quietness into your hands.</p>
+                </div>
+              </div>
+              <div class="craft-feature-item">
+                <div class="cf-icon"><i class="fa-solid fa-pen-fancy"></i></div>
+                <div>
+                  <h4>Reflective Margin Journaling</h4>
+                  <p>Dedicated space for honest prayers and personal revelations.</p>
+                </div>
+              </div>
+              <div class="craft-feature-item">
+                <div class="cf-icon"><i class="fa-solid fa-bookmark"></i></div>
+                <div>
+                  <h4>Included Olive Leaf Bookmark</h4>
+                  <p>A daily reminder to breathe and anchor your heart in truth.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FREE EBOOKS SPOTLIGHT SECTION -->
     <section class="section-free-ebook" id="free-ebook">
       <div class="container free-ebook-container">
-        <div class="free-ebook-card">
+        <div class="free-ebook-card anim-reveal" data-delay="150">
           <div class="free-ebook-content">
             <span class="free-badge"><i class="fa-solid fa-sparkles"></i> Free Resource</span>
             <h2>Get 3 Free Faith-Based Ebooks</h2>
@@ -156,7 +205,7 @@
     <!-- PRAYER REQUEST SECTION -->
     <section class="section-prayer" id="prayer">
       <div class="container">
-        <div class="prayer-card-wrapper">
+        <div class="prayer-card-wrapper anim-reveal" data-delay="150">
           <div class="prayer-content">
             <span class="prayer-badge"><i class="fa-solid fa-heart"></i> We're Praying With You</span>
             <h2>You Don't Have To Carry It Alone</h2>
@@ -181,12 +230,12 @@
     <!-- The 3 Pillars Section -->
     <section class="section-pillars" id="pillars">
       <div class="container">
-        <div class="section-badge-center">The Framework</div>
-        <h2 class="section-main-heading">A Pathway From Broken Striving to Deep Peace</h2>
-        <p class="section-sub-heading">Quiet Reset is built upon three transformative movements to guide your weary soul back to authentic stillness.</p>
+        <div class="section-badge-center anim-reveal">The Framework</div>
+        <h2 class="section-main-heading anim-reveal" data-delay="100">A Pathway From Broken Striving to Deep Peace</h2>
+        <p class="section-sub-heading anim-reveal" data-delay="150">Quiet Reset is built upon three transformative movements to guide your weary soul back to authentic stillness.</p>
 
         <div class="pillars-container">
-          <div class="pillar-lux-card">
+          <div class="pillar-lux-card anim-reveal" data-delay="100">
             <div class="pillar-number">01</div>
             <div class="pillar-icon-box"><i class="fa-solid fa-feather"></i></div>
             <h3>Rest</h3>
@@ -198,7 +247,7 @@
             </ul>
           </div>
 
-          <div class="pillar-lux-card highlighted">
+          <div class="pillar-lux-card highlighted anim-reveal" data-delay="200">
             <div class="pillar-number">02</div>
             <div class="pillar-icon-box"><i class="fa-solid fa-compass-drafting"></i></div>
             <h3>Reset</h3>
@@ -210,7 +259,7 @@
             </ul>
           </div>
 
-          <div class="pillar-lux-card">
+          <div class="pillar-lux-card anim-reveal" data-delay="300">
             <div class="pillar-number">03</div>
             <div class="pillar-icon-box"><i class="fa-solid fa-seedling"></i></div>
             <h3>Rebuild</h3>
@@ -228,7 +277,7 @@
     <!-- Interactive Audience Section (From Back Cover) -->
     <section class="section-audience" id="audience">
       <div class="container">
-        <div class="audience-header-flex">
+        <div class="audience-header-flex anim-reveal">
           <div>
             <div class="section-badge-left">Back Cover Excerpt</div>
             <h2 class="section-main-heading text-left">Who Is This Book For?</h2>
@@ -247,13 +296,13 @@
     <!-- Bundles & E-Commerce Section -->
     <section class="section-shop" id="shop">
       <div class="container">
-        <div class="section-badge-center">Restoration Store</div>
-        <h2 class="section-main-heading">Choose Your Restoration Bundle</h2>
-        <p class="section-sub-heading">Orders are prepared with botanical wrapping, ribbon packaging, and personal blessing cards.</p>
+        <div class="section-badge-center anim-reveal">Restoration Store</div>
+        <h2 class="section-main-heading anim-reveal" data-delay="100">Choose Your Restoration Bundle</h2>
+        <p class="section-sub-heading anim-reveal" data-delay="150">Orders are prepared with botanical wrapping, ribbon packaging, and personal blessing cards.</p>
 
         <div class="bundles-lux-grid">
           <!-- Standard Edition -->
-          <div class="bundle-lux-card">
+          <div class="bundle-lux-card anim-reveal" data-delay="100">
             <div class="bundle-top">
               <span class="tier-tag">Solo Edition</span>
               <h3>Quiet Reset Paperback</h3>
@@ -275,7 +324,7 @@
           </div>
 
           <!-- Featured Restoration Bundle -->
-          <div class="bundle-lux-card featured">
+          <div class="bundle-lux-card featured anim-reveal" data-delay="200">
             <div class="featured-badge">Most Cherished by Readers</div>
             <div class="bundle-top">
               <span class="tier-tag gold">Full Restoration Bundle</span>
@@ -299,7 +348,7 @@
           </div>
 
           <!-- Group & Ministry 5-Pack -->
-          <div class="bundle-lux-card">
+          <div class="bundle-lux-card anim-reveal" data-delay="300">
             <div class="bundle-top">
               <span class="tier-tag">Community & Leaders</span>
               <h3>Small Group 5-Pack</h3>
@@ -323,7 +372,7 @@
         </div>
 
         <!-- Marketplace Links -->
-        <div class="marketplace-channels-box">
+        <div class="marketplace-channels-box anim-reveal" data-delay="150">
           <div class="mp-copy">
             <h4>Prefer Ordering on Your Favorite App?</h4>
             <p>Enjoy Cash on Delivery (COD) and platform voucher discounts on our verified stores:</p>
@@ -348,15 +397,14 @@
       </div>
     </section>
 
-    <!-- Author Spotlight -->
+    <!-- Author Spotlight (Featuring quietreset2.jpg) -->
     <section class="section-author" id="author">
       <div class="container author-split">
-        <div class="author-visual-column">
+        <div class="author-visual-column anim-reveal" data-delay="100">
           <div class="author-frame">
-            <div class="author-image-aesthetic">
-              <div class="botanical-silhouette">
-                <i class="fa-solid fa-seedling"></i>
-              </div>
+            <div class="author-photo-card">
+              <!-- Integrated quietreset2.jpg -->
+              <img src="images/quietreset2.jpg" alt="Ladyh Joy O. - Author of Quiet Reset" class="author-img-actual">
               <div class="author-overlay-badge">
                 <span class="author-name-tag">Ladyh Joy O.</span>
                 <span class="author-sub-tag">Author & Speaker</span>
@@ -369,7 +417,7 @@
           </div>
         </div>
 
-        <div class="author-narrative">
+        <div class="author-narrative anim-reveal" data-delay="250">
           <div class="section-badge-left">The Voice Behind The Movement</div>
           <h2 class="section-main-heading text-left">About Ladyh Joy O.</h2>
           <p class="author-bio-intro">
@@ -407,13 +455,13 @@
     <!-- Reviews Section -->
     <section class="section-reviews" id="reviews">
       <div class="container">
-        <div class="section-badge-center">Voices of Restoration</div>
-        <h2 class="section-main-heading">Stories From the Quiet Reset Community</h2>
-        <p class="section-sub-heading">Read how God is using these pages to bring stillness and healing across the country.</p>
+        <div class="section-badge-center anim-reveal">Voices of Restoration</div>
+        <h2 class="section-main-heading anim-reveal" data-delay="100">Stories From the Quiet Reset Community</h2>
+        <p class="section-sub-heading anim-reveal" data-delay="150">Read how God is using these pages to bring stillness and healing across the country.</p>
 
         <div class="reviews-masonry" id="reviewsGrid"></div>
 
-        <div class="submit-review-prompt">
+        <div class="submit-review-prompt anim-reveal" data-delay="200">
           <p>Has Quiet Reset spoken to your heart?</p>
           <button class="btn btn-lux-ghost" id="openReviewBtn">
             <i class="fa-solid fa-pen-nib"></i> Write Your Review
@@ -449,10 +497,10 @@
         <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="#about">About The Book</a></li>
+          <li><a href="#craftsmanship">The Edition</a></li>
           <li><a href="#free-ebook">Free 3 Ebooks</a></li>
           <li><a href="#prayer">Prayer Requests</a></li>
           <li><a href="#pillars">The 3 Pillars</a></li>
-          <li><a href="#audience">Who It's For</a></li>
           <li><a href="#shop">Order Online</a></li>
         </ul>
       </div>

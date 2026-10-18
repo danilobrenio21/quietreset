@@ -89,13 +89,47 @@ document.addEventListener("DOMContentLoaded", () => {
   renderReviews();
   setup3DBookTilt();
   setupEventListeners();
+  setupAppleScrollEffects();
 });
+
+// Apple-Style Scroll Reveal & Progress Tracker
+function setupAppleScrollEffects() {
+  const progressBar = document.getElementById("scrollProgressLine");
+
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (progressBar) {
+      progressBar.style.width = `${scrollPercent}%`;
+    }
+  }, { passive: true });
+
+  const revealElements = document.querySelectorAll(".anim-reveal");
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.getAttribute("data-delay") || 0;
+        setTimeout(() => {
+          entry.target.classList.add("is-visible");
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: "0px 0px -50px 0px"
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
 
 // Render Audience Cards
 function renderAudienceCards() {
   const container = document.getElementById("audienceContainer");
+  if (!container) return;
   container.innerHTML = audienceData.map((item, idx) => `
-    <div class="audience-interactive-card" onclick="toggleAudienceCard(${idx})">
+    <div class="audience-interactive-card anim-reveal" data-delay="${(idx \% 3) * 100}" onclick="toggleAudienceCard(${idx})">
       <div class="card-top-row">
         <i class="fa-solid ${item.icon} audience-icon"></i>
         <i class="fa-solid fa-chevron-down expand-chevron"></i>
@@ -112,14 +146,17 @@ function renderAudienceCards() {
 
 function toggleAudienceCard(idx) {
   const cards = document.querySelectorAll(".audience-interactive-card");
-  cards[idx].classList.toggle("expanded");
+  if (cards[idx]) {
+    cards[idx].classList.toggle("expanded");
+  }
 }
 
 // Render Reviews
 function renderReviews() {
   const container = document.getElementById("reviewsGrid");
-  container.innerHTML = reviewsList.map(r => `
-    <div class="review-lux-card">
+  if (!container) return;
+  container.innerHTML = reviewsList.map((r, i) => `
+    <div class="review-lux-card anim-reveal" data-delay="${(i % 3) * 100}">
       <div>
         <div class="stars">${'<i class="fa-solid fa-star"></i>'.repeat(r.stars)}</div>
         <p class="quote">“${r.quote}”</p>
@@ -132,7 +169,7 @@ function renderReviews() {
   `).join("");
 }
 
-// 3D Tilt Physics and Specular Light Reflection Engine (Calibrated for Extra Large Scale)
+// 3D Tilt Physics and Specular Light Reflection Engine
 function setup3DBookTilt() {
   const viewport = document.getElementById("bookViewport");
   const card = document.getElementById("book3d");
@@ -169,12 +206,24 @@ function setup3DBookTilt() {
 
 // Event Listeners
 function setupEventListeners() {
-  // Cart Drawer
-  document.getElementById("bagTrigger").addEventListener("click", openCartDrawer);
-  document.getElementById("closeCartBtn").addEventListener("click", closeCartDrawer);
-  document.getElementById("cartBackdrop").addEventListener("click", closeCartDrawer);
+  const bagTrigger = document.getElementById("bagTrigger");
+  const closeCartBtn = document.getElementById("closeCartBtn");
+  const cartBackdrop = document.getElementById("cartBackdrop");
+  const heroExcerptBtn = document.getElementById("heroExcerptBtn");
+  const closeExcerptBtn = document.getElementById("closeExcerptBtn");
+  const openReviewBtn = document.getElementById("openReviewBtn");
+  const closeReviewModalBtn = document.getElementById("closeReviewModalBtn");
+  const reviewForm = document.getElementById("reviewSubmissionForm");
+  const applyPromoBtn = document.getElementById("applyPromoBtn");
+  const checkoutTriggerBtn = document.getElementById("checkoutTriggerBtn");
+  const closeCheckoutBtn = document.getElementById("closeCheckoutBtn");
+  const checkoutForm = document.getElementById("checkoutForm");
+  const soundToggle = document.getElementById("soundToggle");
 
-  // Add to Bag Buttons
+  if (bagTrigger) bagTrigger.addEventListener("click", openCartDrawer);
+  if (closeCartBtn) closeCartBtn.addEventListener("click", closeCartDrawer);
+  if (cartBackdrop) cartBackdrop.addEventListener("click", closeCartDrawer);
+
   document.querySelectorAll(".add-cart-action").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const b = e.currentTarget;
@@ -185,71 +234,86 @@ function setupEventListeners() {
     });
   });
 
-  // Excerpt Modal
-  document.getElementById("heroExcerptBtn").addEventListener("click", () => {
-    document.getElementById("excerptModal").classList.add("active");
-  });
-  document.getElementById("closeExcerptBtn").addEventListener("click", closeAllModals);
+  if (heroExcerptBtn) {
+    heroExcerptBtn.addEventListener("click", () => {
+      const modal = document.getElementById("excerptModal");
+      if (modal) modal.classList.add("active");
+    });
+  }
+  if (closeExcerptBtn) closeExcerptBtn.addEventListener("click", closeAllModals);
 
-  // Review Modal
-  document.getElementById("openReviewBtn").addEventListener("click", () => {
-    document.getElementById("reviewModal").classList.add("active");
-  });
-  document.getElementById("closeReviewModalBtn").addEventListener("click", closeAllModals);
+  if (openReviewBtn) {
+    openReviewBtn.addEventListener("click", () => {
+      const modal = document.getElementById("reviewModal");
+      if (modal) modal.classList.add("active");
+    });
+  }
+  if (closeReviewModalBtn) closeReviewModalBtn.addEventListener("click", closeAllModals);
 
-  // Review Form Submit
-  document.getElementById("reviewSubmissionForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const newRev = {
-      name: document.getElementById("revName").value,
-      role: document.getElementById("revRole").value,
-      stars: parseInt(document.getElementById("revRating").value),
-      quote: document.getElementById("revComment").value
-    };
-    reviewsList.unshift(newRev);
-    renderReviews();
-    closeAllModals();
-    showToast("Thank you. Your testimony has been added!");
-    e.target.reset();
-  });
+  if (reviewForm) {
+    reviewForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const newRev = {
+        name: document.getElementById("revName").value,
+        role: document.getElementById("revRole").value,
+        stars: parseInt(document.getElementById("revRating").value),
+        quote: document.getElementById("revComment").value
+      };
+      reviewsList.unshift(newRev);
+      renderReviews();
+      closeAllModals();
+      showToast("Thank you. Your testimony has been added!");
+      e.target.reset();
+    });
+  }
 
-  // Promo Code
-  document.getElementById("applyPromoBtn").addEventListener("click", () => {
-    const code = document.getElementById("promoCodeInput").value.trim().toUpperCase();
-    if (code === "RESET10") {
-      discount = 0.10;
-      document.getElementById("couponNote").innerText = "10% discount applied!";
-      document.getElementById("couponNote").style.color = "#345e44";
+  if (applyPromoBtn) {
+    applyPromoBtn.addEventListener("click", () => {
+      const input = document.getElementById("promoCodeInput");
+      const code = input ? input.value.trim().toUpperCase() : "";
+      const note = document.getElementById("couponNote");
+      if (code === "RESET10") {
+        discount = 0.10;
+        if (note) {
+          note.innerText = "10% discount applied!";
+          note.style.color = "#345e44";
+        }
+        updateCartDrawer();
+        showToast("Promo code RESET10 applied!");
+      } else {
+        if (note) {
+          note.innerText = "Invalid code. Try RESET10";
+          note.style.color = "#b03e3e";
+        }
+      }
+    });
+  }
+
+  if (checkoutTriggerBtn) {
+    checkoutTriggerBtn.addEventListener("click", () => {
+      if (cart.length === 0) {
+        showToast("Your bag is currently empty");
+        return;
+      }
+      closeCartDrawer();
+      const modal = document.getElementById("checkoutModal");
+      if (modal) modal.classList.add("active");
+    });
+  }
+
+  if (closeCheckoutBtn) closeCheckoutBtn.addEventListener("click", closeAllModals);
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      closeAllModals();
+      cart = [];
       updateCartDrawer();
-      showToast("Promo code RESET10 applied!");
-    } else {
-      document.getElementById("couponNote").innerText = "Invalid code. Try RESET10";
-      document.getElementById("couponNote").style.color = "#b03e3e";
-    }
-  });
+      alert("Blessings! Your order has been placed. You will receive an SMS shipping confirmation with your tracking code.");
+    });
+  }
 
-  // Checkout Triggers
-  document.getElementById("checkoutTriggerBtn").addEventListener("click", () => {
-    if (cart.length === 0) {
-      showToast("Your bag is currently empty");
-      return;
-    }
-    closeCartDrawer();
-    document.getElementById("checkoutModal").classList.add("active");
-  });
-
-  document.getElementById("closeCheckoutBtn").addEventListener("click", closeAllModals);
-
-  document.getElementById("checkoutForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    closeAllModals();
-    cart = [];
-    updateCartDrawer();
-    alert("Blessings! Your order has been placed. You will receive an SMS shipping confirmation with your tracking code.");
-  });
-
-  // Sanctuary Audio Generator
-  document.getElementById("soundToggle").addEventListener("click", toggleAmbientSound);
+  if (soundToggle) soundToggle.addEventListener("click", toggleAmbientSound);
 }
 
 // Shopping Bag Mechanics
@@ -277,18 +341,20 @@ function updateCartDrawer() {
   const statusLabel = document.getElementById("shippingStatusLabel");
   const pctLabel = document.getElementById("shippingPctLabel");
 
+  if (!listEl) return;
+
   const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
-  countBadge.innerText = totalItems;
-  drawerCount.innerText = `${totalItems}${totalItems === 1 ? 'item' : 'items'}`;
+  if (countBadge) countBadge.innerText = totalItems;
+  if (drawerCount) drawerCount.innerText = `${totalItems}${totalItems === 1 ? 'item' : 'items'}`;
 
   if (cart.length === 0) {
     listEl.innerHTML = `<p style="text-align: center; color: #888; padding: 60px 0;">Your shopping bag is empty.</p>`;
-    subtotalEl.innerText = "₱0";
-    totalEl.innerText = "₱0";
-    discountRow.style.display = "none";
-    fillBar.style.width = "0%";
-    statusLabel.innerText = "Add ₱799 for FREE nationwide shipping";
-    pctLabel.innerText = "0%";
+    if (subtotalEl) subtotalEl.innerText = "₱0";
+    if (totalEl) totalEl.innerText = "₱0";
+    if (discountRow) discountRow.style.display = "none";
+    if (fillBar) fillBar.style.width = "0%";
+    if (statusLabel) statusLabel.innerText = "Add ₱799 for FREE nationwide shipping";
+    if (pctLabel) pctLabel.innerText = "0%";
     return;
   }
 
@@ -310,25 +376,27 @@ function updateCartDrawer() {
   const discountVal = subtotal * discount;
   const finalTotal = subtotal - discountVal;
 
-  subtotalEl.innerText = `₱${subtotal.toLocaleString()}`;
-  totalEl.innerText = `₱${finalTotal.toLocaleString()}`;
+  if (subtotalEl) subtotalEl.innerText = `₱${subtotal.toLocaleString()}`;
+  if (totalEl) totalEl.innerText = `₱${finalTotal.toLocaleString()}`;
 
   if (discount > 0) {
-    discountRow.style.display = "flex";
-    discountEl.innerText = `-₱${discountVal.toLocaleString()}`;
+    if (discountRow) discountRow.style.display = "flex";
+    if (discountEl) discountEl.innerText = `-₱${discountVal.toLocaleString()}`;
   } else {
-    discountRow.style.display = "none";
+    if (discountRow) discountRow.style.display = "none";
   }
 
   const pct = Math.min(Math.round((subtotal / 799) * 100), 100);
-  fillBar.style.width = `${pct}%`;
-  pctLabel.innerText = `${pct}%`;
+  if (fillBar) fillBar.style.width = `${pct}%`;
+  if (pctLabel) pctLabel.innerText = `${pct}%`;
 
-  if (subtotal >= 799) {
-    statusLabel.innerHTML = `<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery`;
-  } else {
-    const diff = 799 - subtotal;
-    statusLabel.innerText = `Add ₱${diff.toLocaleString()} more for FREE shipping`;
+  if (statusLabel) {
+    if (subtotal >= 799) {
+      statusLabel.innerHTML = `<strong>Unlocked!</strong> You qualify for FREE Nationwide Delivery`;
+    } else {
+      const diff = 799 - subtotal;
+      statusLabel.innerText = `Add ₱${diff.toLocaleString()} more for FREE shipping`;
+    }
   }
 }
 
@@ -341,13 +409,17 @@ function changeQty(index, change) {
 }
 
 function openCartDrawer() {
-  document.getElementById("cartDrawer").classList.add("active");
-  document.getElementById("cartBackdrop").style.display = "block";
+  const drawer = document.getElementById("cartDrawer");
+  const backdrop = document.getElementById("cartBackdrop");
+  if (drawer) drawer.classList.add("active");
+  if (backdrop) backdrop.style.display = "block";
 }
 
 function closeCartDrawer() {
-  document.getElementById("cartDrawer").classList.remove("active");
-  document.getElementById("cartBackdrop").style.display = "none";
+  const drawer = document.getElementById("cartDrawer");
+  const backdrop = document.getElementById("cartBackdrop");
+  if (drawer) drawer.classList.remove("active");
+  if (backdrop) backdrop.style.display = "none";
 }
 
 function closeAllModals() {
@@ -356,20 +428,22 @@ function closeAllModals() {
 
 function showToast(msg) {
   const t = document.getElementById("luxToast");
-  document.getElementById("toastMessage").innerText = msg;
+  const label = document.getElementById("toastMessage");
+  if (!t || !label) return;
+  label.innerText = msg;
   t.style.display = "flex";
   setTimeout(() => {
     t.style.display = "none";
   }, 2800);
 }
 
-// Gentle Ambient Tone Generator
+// Sanctuary Ambient Audio
 function toggleAmbientSound() {
   const btn = document.getElementById("soundStatus");
   if (!isAudioPlaying) {
     try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioContext = new AudioContext();
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      audioContext = new AudioCtx();
       
       const osc1 = audioContext.createOscillator();
       const osc2 = audioContext.createOscillator();
@@ -390,7 +464,7 @@ function toggleAmbientSound() {
       osc2.start();
 
       isAudioPlaying = true;
-      btn.innerText = "Pause Ambience";
+      if (btn) btn.innerText = "Pause Ambience";
     } catch (err) {
       console.log(err);
     }
@@ -399,6 +473,6 @@ function toggleAmbientSound() {
       audioContext.close();
     }
     isAudioPlaying = false;
-    btn.innerText = "Play Ambience";
+    if (btn) btn.innerText = "Play Ambience";
   }
 }
